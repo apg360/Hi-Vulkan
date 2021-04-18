@@ -1,14 +1,18 @@
 #!/bin/zsh
 
+# Tested on macOS BigSur 11.2.3
+#
 #Pre-requisite, must be installed in the system :
-# (*) Cmake
-# (*) Ninja
-# (*) LLVM + Clang
-# (*) Vulkan SDK from LunarG
-# (*) GLFW
-# (*) Command_Line_Tools_for_Xcode_12.dmg
+# (*) builtin preinstalled macOS llvm 11.0.0
+# (*) Cmake 3.19.1
+# (*) Ninja 1.10.2
+# (*) Vulkan SDK from LunarG,  1.2.148
+# (*) GLFW 3.3.4
+# (*) Command_Line_Tools_for_Xcode_12.4.dmg
+#     If that doesn't show you any updates, run: sudo rm -rf /Library/Developer/CommandLineTools && sudo xcode-select --install
+#     Alternatively, manually download them from: https://developer.apple.com/download/more/.
 
-export PATH=~/MyProjects/clang+llvm-10.0.0-x86_64-apple-darwin/bin:~/MyProjects/Ninja1.10.1/ninja:$PATH
+export PATH=~/MyProjects/Ninja1.10.2/ninja:$PATH
 export CC=clang
 export CXX=clang++
 export SDKROOT='/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'

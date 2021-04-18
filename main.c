@@ -15,6 +15,11 @@
 //# -----------------------------------------------------
 //      Put together all pieces and start Vulkan
 //# -----------------------------------------------------
+https://gpuopen-librariesandsdks.github.io/V-EZ/#_instances
+https://gpuopen.com/learn/reducing-vulkan-api-call-overhead/
+https://blog.magnum.graphics/hacking/simple-efficient-vulkan-loading-with-flextgl/
+
+
 int main(int argc, char *argv[]) {
 
     // https://www.khronos.org/registry/vulkan/specs/1.2/styleguide.html#markup-word-choices
