@@ -136,13 +136,14 @@ int main(int argc, char *argv[]) {
 ////////////////////
 //----------------------
      // Step 11 - Render Loop
-     glfwMakeContextCurrent(windowHandle); // Make the window's context current
+     //glfwMakeContextCurrent(windowHandle); // Make the window's context current, We do not use OpenGL, this is not required
      while ( !glfwWindowShouldClose(windowHandle) )
      {
         // Render here and Keep running
         showFPS(windowHandle); //Calculate frames per second
         
-        //Swap front and back buffers
+        //Swap front and back buffers, waits for the monitor to synchronize to prevent tearing
+        //You can't display more frames to the user than your monitor's refresh rate anyway, which is probably 60Hz, giving approx 17ms between frames.
         glfwSwapBuffers(windowHandle);
         
         //Processing events, normally done each frame after buffer swapping.

@@ -56,9 +56,6 @@ GLFWwindow* SetupWindow(int width, int height)
       return NULL;
     }
     
-    // We do not use OpenGL, this is not required
-    //glfwMakeContextCurrent(windowHandle);
-    
     return windowHandle;
 }
 
