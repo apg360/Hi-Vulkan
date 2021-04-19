@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
         
         //Swap front and back buffers, waits for the monitor to synchronize to prevent tearing
         //You can't display more frames to the user than your monitor's refresh rate anyway, which is probably 60Hz, giving approx 17ms between frames.
-        glfwSwapBuffers(windowHandle);
+        //glfwSwapBuffers(windowHandle); // Cannot swap buffers of a window that has no OpenGL or OpenGL ES context
         
         //Processing events, normally done each frame after buffer swapping.
         //Will use event polling, which processes only those events that have already been received and then returns immediately.
