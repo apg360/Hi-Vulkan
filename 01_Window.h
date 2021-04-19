@@ -67,7 +67,7 @@ void showFPS(GLFWwindow* windowHandle)
          //dlg_warn("nbFrames/delta: %.1f",nbFrames/delta);
          
          double fps = (double) nbFrames/delta;
-         //dlg_info("FPS: %.1f",fps);
+         dlg_info("FPS : %.1f",fps);
          
          //cout << 1000.0/double(nbFrames) << endl;
          //std::stringstream ss;
