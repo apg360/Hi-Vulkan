@@ -135,18 +135,20 @@ int main(int argc, char *argv[]) {
 */
 ////////////////////
 //----------------------
-     // Step 11 - Render Loop                 (Section 6.16)
+     // Step 11 - Render Loop
+     glfwMakeContextCurrent(windowHandle); // Make the window's context current
      while ( !glfwWindowShouldClose(windowHandle) )
      {
-        // Keep running
+        // Render here and Keep running
+        showFPS(windowHandle); //Calculate frames per second
         
-        //Calculate frames per second
-        showFPS(windowHandle);
+        //Swap front and back buffers
+        glfwSwapBuffers(windowHandle);
         
         //Processing events, normally done each frame after buffer swapping.
         //Will use event polling, which processes only those events that have already been received and then returns immediately.
         //This is the best choice when rendering continually, like most games do.
-        glfwPollEvents();
+        glfwPollEvents(); // Poll for and process events
         
         //Render the screen
         /*RenderLoop(device,
@@ -179,7 +181,7 @@ int main(int argc, char *argv[]) {
      free(presentImages);
      free(presentImageViews);
 
-     vkDestroyInstance(instance, NULL);
+     vezDestroyInstance(instance); //vkDestroyInstance(instance, NULL);
 */
      glfwDestroyWindow(windowHandle);
      glfwTerminate();

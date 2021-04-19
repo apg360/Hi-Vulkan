@@ -4,6 +4,19 @@
 //# -----------------------------------------------------
 // Step 1 - Window
 
+#define GLFW_INCLUDE_NONE
+
+// GLFW window API macros
+//#define GLFW_EXPOSE_NATIVE_WIN32 // glfwGetWin32Window (GLFWwindow *window)
+//#define GLFW_EXPOSE_NATIVE_COCOA // glfwGetCocoaWindow (GLFWwindow *window)
+//#define GLFW_EXPOSE_NATIVE_X11 // glfwGetX11Window (GLFWwindow *window)
+
+// GLFW context API macros
+//#define GLFW_EXPOSE_NATIVE_GLX // glfwGetGLXContext (GLFWwindow *window)
+
+//GLFW
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h> // https://www.glfw.org/docs/3.0/group__native.html
 
 //________//________// 
 // Definition Variables and Functions before main function of this step
@@ -30,10 +43,11 @@ GLFWwindow* SetupWindow(int width, int height)
         dlg_fatal("Failed to initialize GLFW");
         return NULL;
     }
-
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    
+    //glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     GLFWwindow* windowHandle = glfwCreateWindow(width, height, "Vulkan window", NULL, NULL);
+    //glfwGetX11Window(windowHandle);
     
     if (!windowHandle)
     {

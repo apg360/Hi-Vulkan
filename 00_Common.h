@@ -1,29 +1,17 @@
 
 #pragma once // include guard
 
-/*
-#include <volk.h>
-//#define VK_EXT_metal_surface //VK_USE_PLATFORM_MACOS_MVK
-//#define VK_NO_PROTOTYPES
-//#define GLFW_INCLUDE_VULKAN
-#define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
-*/
-
-
 //Note that to avoid symbol conflicts, you have to make sure all translation units in your application include volk.h instead of vulkan.h, 
 //  or that you define VK_NO_PROTOTYPES project-wide to make sure you aren’t accidentally picking up symbols from the real Vulkan loader. 
 #define VK_NO_PROTOTYPES
 
 // Vulkan backtrace error
-#define ENABLE_VULKAN_DEBUG_CALLBACK
 
+#define ENABLE_VULKAN_DEBUG_CALLBACK
 // If you instead want to include the Vulkan header from a custom location
 // Or use your own custom Vulkan header then do this before the GLFW header.
 // => https://www.glfw.org/docs/3.2/vulkan.html
 #include <volk.h>
-#include <GLFW/glfw3.h>
-
 
 #include <stdio.h>
 #include <stdlib.h>     // EXIT_FAILURE, EXIT_SUCCESS
