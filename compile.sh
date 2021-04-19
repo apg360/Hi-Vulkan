@@ -38,7 +38,12 @@ cmake -E time cmake --build build
 #glslangValidator -V simple.vert
 #cp vert.spv frag.spv build/
 
-#Run application
-echo -e "\n********* STARTING ********\n"
-build/./VulkanKore
+#Run application if it exists (will exist if was compiled successfully)
+executableFileName=VulkanKore
+if [ -f build/$executableFileName ]; then
+        echo -e "\n********* STARTING ********\n"
+        build/./$executableFileName
+else 
+    echo -e "\nERROR: Compilation failed, $executableFileName does not exist.\n"
+fi
 echo -e "\n\n"

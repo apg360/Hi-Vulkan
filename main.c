@@ -1,6 +1,14 @@
 
+// https://gpuopen-librariesandsdks.github.io/V-EZ
+// https://www.khronos.org/registry/vulkan/specs/1.2/styleguide.html#markup-word-choices
+//
+// https://gpuopen.com/learn/reducing-vulkan-api-call-overhead
+// https://blog.magnum.graphics/hacking/simple-efficient-vulkan-loading-with-flextgl
+
+
 #include "00_Common.h"                // <-- Includes required for everything
 #include "01_Window.h"                // <-- GLFW window, context, keyboard, mouse
+/*
 #include "02_VulkanInstance.h"        // <-- (Section 6.2)  Initialize Vulkan
 #include "03_PhysicalDevice.h"        // <-- (Section 6.4)  Find/Create Device and Set-up your selected device
 #include "04_SwapChain.h"             // <-- (Section 6.5)  Initialize Swap-Chain
@@ -11,18 +19,12 @@
 #include "09_Descriptors.h"           // <-- (Section 6.13) Setup Descriptors/Sets
 #include "10_Pipeline.h"             // <-- (Section 6.14) Pipeline
 #include "11_RenderLoop.h"           // <-- (Section 6.16) Render Loop
+*/
 
 //# -----------------------------------------------------
 //      Put together all pieces and start Vulkan
 //# -----------------------------------------------------
-https://gpuopen-librariesandsdks.github.io/V-EZ/#_instances
-https://gpuopen.com/learn/reducing-vulkan-api-call-overhead/
-https://blog.magnum.graphics/hacking/simple-efficient-vulkan-loading-with-flextgl/
-
-
 int main(int argc, char *argv[]) {
-
-    // https://www.khronos.org/registry/vulkan/specs/1.2/styleguide.html#markup-word-choices
 
     // Step 1 - Initializing the window
     int             width               = 800;
@@ -35,6 +37,7 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
+/*
     // Step 2 - Initialize Vulkan          (Section 6.2)
     VkInstance    instance                  = NULL;
     VkSurfaceKHR  surface                   = NULL;
@@ -129,7 +132,7 @@ int main(int argc, char *argv[]) {
                    &pipeline,
                    &pipelineLayout);
 
-
+*/
 ////////////////////
 //----------------------
      // Step 11 - Render Loop                 (Section 6.16)
@@ -146,7 +149,7 @@ int main(int argc, char *argv[]) {
         glfwPollEvents();
         
         //Render the screen
-        RenderLoop(device,
+        /*RenderLoop(device,
                    width,
                    height,
                    numberOfTriangles,
@@ -158,11 +161,13 @@ int main(int argc, char *argv[]) {
                    vertexInputBuffer,
                    descriptorSet,
                    pipelineLayout,
-                   pipeline);
+                   pipeline);*/
          
      }// End while(..)
+
 //______________________
 //The Cleanup
+/*
      //vkDestroyDebugUtilsMessengerEXT(instance, debugUtilsMessenger, NULL);
      vkDestroyDebugReportCallbackEXT(instance, debugReportCallback_Warning, NULL);
      vkDestroyDebugReportCallbackEXT(instance, debugReportCallback_Error, NULL);
@@ -175,6 +180,7 @@ int main(int argc, char *argv[]) {
      free(presentImageViews);
 
      vkDestroyInstance(instance, NULL);
+*/
      glfwDestroyWindow(windowHandle);
      glfwTerminate();
 

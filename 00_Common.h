@@ -30,9 +30,10 @@
 #include <assert.h>     // C++ DBG_ASSERT become assert
 #include <string.h>     // strcpy, strcmp, strcat(concatenates), etc...
 #include <dlg/dlg.h>    // logging
-#include <mathc.h>    // single header library for 3D linear algebra; MATHC is a simple math library for 2D and 3D programming.
+#include <mathc.h>      // single header library for 3D linear algebra; MATHC is a simple math library for 2D and 3D programming.
 
-//#include <vector.h>   // std::vector from C++ to C
+//#include <vector.h>   // std::vector from C++ to C --> "${CMAKE_CURRENT_SOURCE_DIR}/libs/vector"
+//#include "libs/vector_typed_list/vector.h"
 
 //Check vulkan error and exit application
 #define ERR_VULKAN_EXIT(val, err_msg)               \
