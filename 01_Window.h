@@ -44,7 +44,8 @@ GLFWwindow* SetupWindow(int width, int height)
         return NULL;
     }
     
-    //glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     GLFWwindow* windowHandle = glfwCreateWindow(width, height, "Vulkan window", NULL, NULL);
     //glfwGetX11Window(windowHandle);
