@@ -24,8 +24,41 @@ target_compile_features(VulkanKore PRIVATE c_std_11) #Compiler mode is at least 
 # (*) brew install glfw3 --HEAD
 # (*) LunarG SDK Vulkan
 
+#############################################
+#Finding and linking libpthread
+#Required by DLG lib => libDLG.a(dlg.c.o): undefined reference to symbol 'pthread_once@@GLIBC_2.2.5'
+set(PTHREAD_LIBS "")
+include(CheckLibraryExists)
+#-- Looking for pthread_once in pthread
+check_library_exists(pthread pthread_once "" LIBPTHREAD)
+if(LIBPTHREAD)
+    list(APPEND PTHREAD_LIBS "pthread")
+endif()
+target_link_libraries(VulkanKore PUBLIC ${PTHREAD_LIBS})
+
+#Finding and linking libm
+if(APPLE)
+  find_library(MATH_LIBRARY NAMES libm.dylib)
+elseif(UNIX)
+  find_library(MATH_LIBRARY NAMES libm.a)
+endif()
+if(MATH_LIBRARY)
+  get_filename_component(MATH_LIB_DIR ${MATH_LIBRARY} PATH)
+  link_directories(${MATH_LIB_DIR})
+   message(STATUS "libm FOUND ${MATH_LIBRARY}")
+  # Name the library both with a full path and as "-lm" to
+  # activate the link type switching code for both cases.
+  # If the second one links shared then the link will fail.
+  set(MATH_LIBRARIES ${MATH_LIBRARY} -lm)
+  
+  target_link_libraries(VulkanKore PUBLIC ${MATH_LIBRARIES})
+else()
+  message(FATAL_ERROR "Cannot find libm.a needed for this test")
+endif()
+#############################################
+
 #Finding and linking GLFW3 (windowing, context & input)
-find_package(GLFW3 3.3 REQUIRED)
+find_package(GLFW3 REQUIRED)
 if (GLFW3_FOUND)
     message(STATUS "GLFW3 FOUND")
     #message(STATUS "GLFW3_INCLUDE_DIRS in ${GLFW3_INCLUDE_DIR}")
@@ -48,7 +81,7 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
   message(STATUS "CMAKE_SYSTEM_NAME = Darwin, VOLK_STATIC_DEFINES VK_USE_PLATFORM_MACOS_MVK")
   set(VOLK_STATIC_DEFINES VK_USE_PLATFORM_MACOS_MVK)
 endif()
-add_subdirectory(libs/volk volk)
+add_subdirectory(libs/volk-1.2.140 volk)
 target_link_libraries(VulkanKore PUBLIC volk)
 
 #Finding and linking Vulkan
@@ -64,10 +97,10 @@ endif (Vulkan_FOUND)
 
 # -----------------------------------------------------
 target_include_directories(VulkanKore
-   PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/MATHC"        # single header linear algebra for 3D
+   PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/mathc"        # single header linear algebra for 3D
    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/vector"       # std::vector from C++ to C
    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/dlg/include"  # logging
-   PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/dlg/src"  # logging
+   PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/dlg/src"      # logging
    )
 
 #Debug with lldb
