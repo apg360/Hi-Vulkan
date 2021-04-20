@@ -101,6 +101,7 @@ target_include_directories(VulkanKore
    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/vector"       # std::vector from C++ to C
    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/dlg/include"  # logging
    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/dlg/src"      # logging
+   PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/Source"  # V-EZ
    )
 
 #Debug with lldb

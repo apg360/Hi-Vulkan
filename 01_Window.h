@@ -4,7 +4,7 @@
 //# -----------------------------------------------------
 // Step 1 - Window
 
-#define GLFW_INCLUDE_NONE
+#define GLFW_INCLUDE_NONE // include no OpenGL header
 
 // GLFW window API macros
 //#define GLFW_EXPOSE_NATIVE_WIN32 // glfwGetWin32Window (GLFWwindow *window)
