@@ -4,20 +4,6 @@
 //# -----------------------------------------------------
 // Step 1 - Window
 
-#define GLFW_INCLUDE_NONE // include no OpenGL header
-
-// GLFW window API macros
-//#define GLFW_EXPOSE_NATIVE_WIN32 // glfwGetWin32Window (GLFWwindow *window)
-//#define GLFW_EXPOSE_NATIVE_COCOA // glfwGetCocoaWindow (GLFWwindow *window)
-//#define GLFW_EXPOSE_NATIVE_X11 // glfwGetX11Window (GLFWwindow *window)
-
-// GLFW context API macros
-//#define GLFW_EXPOSE_NATIVE_GLX // glfwGetGLXContext (GLFWwindow *window)
-
-//GLFW
-#include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h> // https://www.glfw.org/docs/3.0/group__native.html
-
 //________//________// 
 // Definition Variables and Functions before main function of this step
 // Most events are reported through callbacks, whether it's a key being pressed, 
@@ -32,7 +18,7 @@ int nbFrames = 0;
 double lastTime = 0;
 //________//________// END
 
-GLFWwindow* SetupWindow()
+SetupWindow(struct global_parameters *VulkanKore_param)
 {
     //Callback functions must be set, so GLFW knows to call them. 
     glfwSetErrorCallback(glfw_error_callback);
@@ -47,20 +33,24 @@ GLFWwindow* SetupWindow()
     // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    GLFWwindow* windowHandle = glfwCreateWindow(VulkanKore.width, VulkanKore.height, "Vulkan window", NULL, NULL);
+    vulkan_kore_app->windowHandle = glfwCreateWindow(VulkanKore_param->width, VulkanKore_param->height, "Vulkan window", NULL, NULL);
     //glfwGetX11Window(windowHandle);
     
-    if (!windowHandle)
+    if (!vulkan_kore_app->windowHandle)
     {
       dlg_fatal("GLFW failed to create window");
       glfwTerminate();
       return NULL;
     }
     
-    return windowHandle;
+    if ( VulkanKore_param->windowHandle == NULL ) {
+        printf( "Failed to open GLFW window.\n" );
+        glfwTerminate();
+        return EXIT_FAILURE;
+    }
 }
 
-void showFPS(GLFWwindow* windowHandle)
+void showFPS()
 {
      // Measure speed
      //char title_string[256];

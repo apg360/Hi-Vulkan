@@ -21,31 +21,24 @@
 #include "11_RenderLoop.h"           // <-- (Section 6.16) Render Loop
 */
 
-struct VulkanKore {
-    int		width               	= 800;
-    int		height              	= 600;
-	GLFWwindow* windowHandle 		= NULL;
-	//VkInstance instance 			= VK_NULL_HANDLE;
-	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	//VkSurfaceKHR surface 			= VK_NULL_HANDLE;
-	//VkDevice device 				= VK_NULL_HANDLE;
-	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
-};
+struct global_parameters VulkanKore_param;
 
 //# -----------------------------------------------------
 //      Put together all pieces and start Vulkan
 //# -----------------------------------------------------
 int main(int argc, char *argv[]) {
 
+	int result;
+	
     // Step 1 - Initializing the window
-    VulkanKore.width  = 800;
-    VulkanKore.height = 600;
-    windowHandle = SetupWindow();
-    if ( VulkanKore.windowHandle == NULL ) {
+    VulkanKore_param.width  = 800;
+    VulkanKore_param.height = 600;
+    result = SetupWindow(&VulkanKore_param);
+    if ( result == EXIT_FAILURE ) {
         printf( "Failed to open GLFW window.\n" );
-        glfwTerminate();
         return EXIT_FAILURE;
     }
+    
 
 /*
     // Step 2 - Initialize Vulkan          (Section 6.2)
@@ -147,10 +140,10 @@ int main(int argc, char *argv[]) {
 //----------------------
      // Step 11 - Render Loop
      //glfwMakeContextCurrent(windowHandle); // Make the window's context current, We do not use OpenGL, this is not required
-     while ( !glfwWindowShouldClose(windowHandle) )
+     while ( !glfwWindowShouldClose(VulkanKore_param.windowHandle) )
      {
         // Render here and Keep running
-        showFPS(windowHandle); //Calculate frames per second
+        showFPS(); //Calculate frames per second
         
         //Swap front and back buffers, waits for the monitor to synchronize to prevent tearing
         //You can't display more frames to the user than your monitor's refresh rate anyway, which is probably 60Hz, giving approx 17ms between frames.
@@ -194,7 +187,7 @@ int main(int argc, char *argv[]) {
 
      vezDestroyInstance(instance); //vkDestroyInstance(instance, NULL);
 */
-     glfwDestroyWindow(windowHandle);
+     glfwDestroyWindow(VulkanKore_param.windowHandle);
      glfwTerminate();
 
 // End
