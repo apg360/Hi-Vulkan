@@ -18,7 +18,7 @@ int nbFrames = 0;
 double lastTime = 0;
 //________//________// END
 
-SetupWindow(struct global_parameters *VulkanKore_param)
+int SetupWindow(struct global_parameters *VulkanKore_param)
 {
     //Callback functions must be set, so GLFW knows to call them. 
     glfwSetErrorCallback(glfw_error_callback);
@@ -27,27 +27,22 @@ SetupWindow(struct global_parameters *VulkanKore_param)
     if( !glfwInit() )
     {
         dlg_fatal("Failed to initialize GLFW");
-        return NULL;
+        //return EXIT_FAILURE;
     }
     
     // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    vulkan_kore_app->windowHandle = glfwCreateWindow(VulkanKore_param->width, VulkanKore_param->height, "Vulkan window", NULL, NULL);
+    VulkanKore_param->windowHandle = glfwCreateWindow(VulkanKore_param->width, VulkanKore_param->height, "Vulkan window", NULL, NULL);
     //glfwGetX11Window(windowHandle);
     
-    if (!vulkan_kore_app->windowHandle)
+    if (VulkanKore_param->windowHandle == NULL )
     {
       dlg_fatal("GLFW failed to create window");
       glfwTerminate();
-      return NULL;
+      return EXIT_FAILURE;
     }
     
-    if ( VulkanKore_param->windowHandle == NULL ) {
-        printf( "Failed to open GLFW window.\n" );
-        glfwTerminate();
-        return EXIT_FAILURE;
-    }
 }
 
 void showFPS()
