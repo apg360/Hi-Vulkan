@@ -45,9 +45,9 @@
 //________//________// //________//________// //________//________// 
 
 struct global_parameters {
-    int		width					= 800;
-    int		height					= 600;
-	GLFWwindow* windowHandle		= NULL;
+    int		width;
+    int		height;
+	GLFWwindow* windowHandle;
 	//VkInstance instance 			= VK_NULL_HANDLE;
 	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	//VkSurfaceKHR surface 			= VK_NULL_HANDLE;
