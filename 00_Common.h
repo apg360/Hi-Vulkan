@@ -53,10 +53,13 @@
     dlg_asserttm(("tag3"), 3 == 2, "The same goes for asserts");
 */
 
-GLFWwindow* windowHandle 		= NULL;
-VkInstance instance 			= VK_NULL_HANDLE;
-VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-VkSurfaceKHR surface 			= VK_NULL_HANDLE;
-VkDevice device 				= VK_NULL_HANDLE;
-VezSwapchain swapchain 			= VK_NULL_HANDLE;
-
+struct VulkanKore {
+    int		width               	= 800;
+    int		height              	= 600;
+	GLFWwindow* windowHandle 		= NULL;
+	VkInstance instance 			= VK_NULL_HANDLE;
+	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+	VkSurfaceKHR surface 			= VK_NULL_HANDLE;
+	VkDevice device 				= VK_NULL_HANDLE;
+	VezSwapchain swapchain 			= VK_NULL_HANDLE;
+};

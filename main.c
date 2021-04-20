@@ -21,17 +21,27 @@
 #include "11_RenderLoop.h"           // <-- (Section 6.16) Render Loop
 */
 
+struct VulkanKore {
+    int		width               	= 800;
+    int		height              	= 600;
+	GLFWwindow* windowHandle 		= NULL;
+	VkInstance instance 			= VK_NULL_HANDLE;
+	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+	VkSurfaceKHR surface 			= VK_NULL_HANDLE;
+	VkDevice device 				= VK_NULL_HANDLE;
+	VezSwapchain swapchain 			= VK_NULL_HANDLE;
+};
+
 //# -----------------------------------------------------
 //      Put together all pieces and start Vulkan
 //# -----------------------------------------------------
 int main(int argc, char *argv[]) {
 
     // Step 1 - Initializing the window
-    int             width               = 800;
-    int             height              = 600;
-    GLFWwindow*   windowHandle;
-    windowHandle = SetupWindow(width, height);
-    if( windowHandle == NULL ){
+    VulkanKore.width  = 800;
+    VulkanKore.height = 600;
+    windowHandle = SetupWindow();
+    if ( VulkanKore.windowHandle == NULL ) {
         printf( "Failed to open GLFW window.\n" );
         glfwTerminate();
         return EXIT_FAILURE;

@@ -46,11 +46,7 @@ void SetupVulkanInstance()
 	if (result != VK_SUCCESS) return false;
 	
     //--//--//--//
-	cleanup_02()
+	//Cleanup (for every "malloc" there must be a "free"
     
 }// END SetupVulkanInstance()
 
-//Cleanup (for every "malloc" there must be a "free"
-void cleanup_02()
-{
-}

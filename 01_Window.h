@@ -32,7 +32,7 @@ int nbFrames = 0;
 double lastTime = 0;
 //________//________// END
 
-GLFWwindow* SetupWindow(int width, int height)
+GLFWwindow* SetupWindow()
 {
     //Callback functions must be set, so GLFW knows to call them. 
     glfwSetErrorCallback(glfw_error_callback);
@@ -47,7 +47,7 @@ GLFWwindow* SetupWindow(int width, int height)
     // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    GLFWwindow* windowHandle = glfwCreateWindow(width, height, "Vulkan window", NULL, NULL);
+    GLFWwindow* windowHandle = glfwCreateWindow(VulkanKore.width, VulkanKore.height, "Vulkan window", NULL, NULL);
     //glfwGetX11Window(windowHandle);
     
     if (!windowHandle)
