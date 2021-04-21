@@ -8,8 +8,9 @@
 
 #include "00_Common.h"                // <-- Includes required for everything
 #include "01_Window.h"                // <-- GLFW window, context, keyboard, mouse
+#include "02_VulkanInstance.h"        // <-- Initialize V-EZ Vulkan
+
 /*
-#include "02_VulkanInstance.h"        // <-- (Section 6.2)  Initialize Vulkan
 #include "03_PhysicalDevice.h"        // <-- (Section 6.4)  Find/Create Device and Set-up your selected device
 #include "04_SwapChain.h"             // <-- (Section 6.5)  Initialize Swap-Chain
 #include "05_RenderPass.h"            // <-- (Section 6.6)  Create Render Pass
@@ -27,7 +28,7 @@ struct global_parameters VulkanKore_param;
 //      Put together all pieces and start Vulkan
 //# -----------------------------------------------------
 int main(int argc, char *argv[]) {
-
+    
 	int result;
 	
     // Step 1 - Initializing the window
@@ -35,19 +36,20 @@ int main(int argc, char *argv[]) {
     VulkanKore_param.height = 600;
     result = SetupWindow(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
-        printf( "Failed to open GLFW window.\n" );
+        dlg_fatal( "Failed to open GLFW window.\n" );
         return EXIT_FAILURE;
     }
     
-
-/*
-    // Step 2 - Initialize Vulkan          (Section 6.2)
-    VkInstance    instance                  = NULL;
-    VkSurfaceKHR  surface                   = NULL;
-    SetupVulkanInstance(windowHandle,
-                        &instance,
-                        &surface);
+    // Step 2 - Initialize Vulkan
+    VulkanKore_param.instance = VK_NULL_HANDLE;
+    VulkanKore_param.surface  = VK_NULL_HANDLE;
+    result = SetupVulkanInstance(&VulkanKore_param);
+    if ( result == EXIT_FAILURE ) {
+        dlg_fatal( "Failed to initialize Vulkan instance.\n" );
+        return EXIT_FAILURE;
+    }
     
+    /*
     // Step 3 - Find/Create Device and     (Section 6.4)
     //          Set-up your selected device
     VkPhysicalDevice physicalDevice         = NULL;

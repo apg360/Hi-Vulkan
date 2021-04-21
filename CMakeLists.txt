@@ -69,6 +69,21 @@ endif (GLFW3_FOUND)
 add_library(DLG "libs/dlg/include/dlg/dlg.h" "libs/dlg/include/dlg/dlg.hpp" "libs/dlg/include/dlg/output.h" "libs/dlg/src/dlg/dlg.c")
 target_link_libraries(VulkanKore PUBLIC DLG)
 
+#Finding and linking Vulkan
+#https://cmake.org/cmake/help/latest/module/FindVulkan.html
+find_package (Vulkan REQUIRED)
+if (Vulkan_FOUND)
+    message(STATUS "Vulkan FOUND")
+    include_directories(${Vulkan_INCLUDE_DIRS})
+    target_link_libraries (VulkanKore PUBLIC ${Vulkan_LIBRARIES})
+    message(STATUS "Vulkan_INCLUDE_DIRS : " ${Vulkan_INCLUDE_DIRS})
+    message(STATUS "Vulkan_LIBRARIES : " ${Vulkan_LIBRARIES})
+endif (Vulkan_FOUND)
+
+# 
+#add_subdirectory(libs/v-ez vez)
+#target_link_libraries(VulkanKore PUBLIC vez)
+
 #Volk
 # Set a suitable platform define to compile volk with.
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)
@@ -83,17 +98,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
 endif()
 add_subdirectory(libs/volk-1.2.140 volk)
 target_link_libraries(VulkanKore PUBLIC volk)
-
-#Finding and linking Vulkan
-#https://cmake.org/cmake/help/latest/module/FindVulkan.html
-find_package (Vulkan REQUIRED)
-if (Vulkan_FOUND)
-    message(STATUS "Vulkan FOUND")
-    include_directories(${Vulkan_INCLUDE_DIRS})
-    target_link_libraries (VulkanKore PUBLIC ${Vulkan_LIBRARIES})
-    message(STATUS "Vulkan_INCLUDE_DIRS : " ${Vulkan_INCLUDE_DIRS})
-    message(STATUS "Vulkan_LIBRARIES : " ${Vulkan_LIBRARIES})
-endif (Vulkan_FOUND)
 
 # -----------------------------------------------------
 target_include_directories(VulkanKore

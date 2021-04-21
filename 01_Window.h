@@ -31,7 +31,7 @@ int SetupWindow(struct global_parameters *VulkanKore_param)
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     VulkanKore_param->windowHandle = glfwCreateWindow(VulkanKore_param->width, VulkanKore_param->height, "Vulkan window", NULL, NULL);
-    //glfwGetX11Window(windowHandle);
+    //glfwGetX11Window(VulkanKore_param->windowHandle);
     
     if (VulkanKore_param->windowHandle == NULL )
     {

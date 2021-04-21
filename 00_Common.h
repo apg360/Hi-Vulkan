@@ -38,22 +38,28 @@
 // If you instead want to include the Vulkan header from a custom location
 // Or use your own custom Vulkan header then do this before the GLFW header.
 // => https://www.glfw.org/docs/3.2/vulkan.html
-#include <volk.h>
+//#include <volk.h>
 
 //V-EZ
-//#include <VEZ.h>
+#include <VEZ.h>
 //________//________// //________//________// //________//________// 
 
 struct global_parameters {
     int		width;
     int		height;
 	GLFWwindow* windowHandle;
-	//VkInstance instance 			= VK_NULL_HANDLE;
+	VkInstance instance;
+	VkSurfaceKHR surface;
 	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	//VkSurfaceKHR surface 			= VK_NULL_HANDLE;
 	//VkDevice device 				= VK_NULL_HANDLE;
 	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
 };
+
+// This is a universal formula to find number of elements present in an array
+//   it will work for arrays of all data types such as int, char, float etc.
+// We must use define instead of a function. Because An array sent as a parameter to a function is treated as a pointer, 
+//   so sizeof will return the pointer's size, instead of the array's. : void printSizeOf(int intArray[])
+#define COUNT_ARRAY_ELEMS(x) (int) (sizeof(x) / sizeof((x)[0]))
 
 //Check vulkan error and exit application
 #define ERR_VULKAN_EXIT(val, err_msg)               \
@@ -79,13 +85,6 @@ struct global_parameters {
         fflush(stdout);                             \
         exit(1);                                    \
     } while (0)
-
-// This is a universal formula to find number of elements present in an array
-//   it will work for arrays of all data types such as int, char, float etc.
-// We must use define instead of a function. Because An array sent as a parameter to a function is treated as a pointer, 
-//   so sizeof will return the pointer's size, instead of the array's. : void printSizeOf(int intArray[])
-#define COUNT_ARRAY_ELEMS(x) (int) (sizeof(x) / sizeof((x)[0]))
-
 
 /*
     dlg_warn("This is a warning. If on a console, it will be printed yellow");
