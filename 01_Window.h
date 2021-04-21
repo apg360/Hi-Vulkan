@@ -13,9 +13,6 @@ void glfw_error_callback(int error, const char* description)
     fprintf(stderr, "Error: %s\n", description);
     dlg_error("Error: %s\n", description);
 }
-
-int nbFrames = 0;
-double lastTime = 0;
 //________//________// END
 
 int SetupWindow(struct global_parameters *VulkanKore_param)
@@ -27,7 +24,7 @@ int SetupWindow(struct global_parameters *VulkanKore_param)
     if( !glfwInit() )
     {
         dlg_fatal("Failed to initialize GLFW");
-        //return EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
     
     // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
@@ -43,41 +40,6 @@ int SetupWindow(struct global_parameters *VulkanKore_param)
       return EXIT_FAILURE;
     }
     
+    return EXIT_SUCCESS;
 }
 
-void showFPS()
-{
-     // Measure speed
-     //char title_string[256];
-     //title_string [255] = 'VulkanKore';
-     
-     double currentTime = glfwGetTime();
-     double delta = currentTime - lastTime;
-     nbFrames++;
-     
-     if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
-         
-         //dlg_warn("currentTime: %.1f",currentTime);
-         //dlg_warn("lastTime: %.1f",lastTime);
-         //dlg_warn("delta: %.1f",delta);
-         //dlg_warn("nbFrames: %u",nbFrames);
-         //dlg_warn("nbFrames/delta: %.1f",nbFrames/delta);
-         
-         double fps = (double) nbFrames/delta;
-         dlg_info("FPS : %.1f",fps);
-         
-         //cout << 1000.0/double(nbFrames) << endl;
-         //std::stringstream ss;
-         //ss << GAME_NAME << " " << VERSION << " [" << fps << " FPS]";
-         
-         //snprintf ( title, 255, "%s %s - [FPS: %3.2f]",
-         //             GAME_NAME, VERSION, 1000.0f / (float)nbFrames );
-                   
-         //glfwSetWindowTitle(windowHandle, ss.str().c_str());
-         //glfwSetWindowTitle(windowHandle, title_string);
-         
-         nbFrames = 0;
-         lastTime = currentTime;
-     }
-     //assert(false);
-}

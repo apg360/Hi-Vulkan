@@ -97,3 +97,41 @@ struct global_parameters {
     dlg_asserttm(("tag3"), 3 == 2, "The same goes for asserts");
 */
 
+int fps_nbFrames = 0;
+double fps_lastTime = 0;
+void showFPS()
+{
+     // Measure speed
+     //char title_string[256];
+     //title_string [255] = 'VulkanKore';
+     
+     double currentTime = glfwGetTime();
+     double delta = currentTime - fps_lastTime;
+     fps_nbFrames++;
+     
+     if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
+         
+         //dlg_warn("currentTime: %.1f",currentTime);
+         //dlg_warn("lastTime: %.1f",lastTime);
+         //dlg_warn("delta: %.1f",delta);
+         //dlg_warn("nbFrames: %u",nbFrames);
+         //dlg_warn("nbFrames/delta: %.1f",nbFrames/delta);
+         
+         double fps = (double) fps_nbFrames/delta;
+         dlg_info("FPS : %.1f",fps);
+         
+         //cout << 1000.0/double(nbFrames) << endl;
+         //std::stringstream ss;
+         //ss << GAME_NAME << " " << VERSION << " [" << fps << " FPS]";
+         
+         //snprintf ( title, 255, "%s %s - [FPS: %3.2f]",
+         //             GAME_NAME, VERSION, 1000.0f / (float)nbFrames );
+                   
+         //glfwSetWindowTitle(windowHandle, ss.str().c_str());
+         //glfwSetWindowTitle(windowHandle, title_string);
+         
+         fps_nbFrames = 0;
+         fps_lastTime = currentTime;
+     }
+     //assert(false);
+}
