@@ -15,17 +15,17 @@ struct SPIRV_Cross_Output
     float4 gl_Position : SV_Position;
 };
 
-void test(out float4 spvReturnValue[2])
+void test(out float4 SPIRV_Cross_return_value[2])
 {
-    spvReturnValue = _20;
+    SPIRV_Cross_return_value = _20;
 }
 
-void test2(out float4 spvReturnValue[2])
+void test2(out float4 SPIRV_Cross_return_value[2])
 {
     float4 foobar[2];
     foobar[0] = vInput0;
     foobar[1] = vInput1;
-    spvReturnValue = foobar;
+    SPIRV_Cross_return_value = foobar;
 }
 
 void vert_main()

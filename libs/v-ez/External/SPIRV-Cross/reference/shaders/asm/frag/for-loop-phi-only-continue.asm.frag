@@ -12,6 +12,7 @@ void main()
     {
         _20 = _19 + 1.0;
         _23 = _22 + 1;
+        continue;
     }
     FragColor = vec4(_19);
 }

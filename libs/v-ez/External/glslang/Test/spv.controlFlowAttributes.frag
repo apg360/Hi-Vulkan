@@ -4,18 +4,11 @@
 
 bool cond;
 
-void f0() {
-        [[loop]]                   for (;;) { }
-}
-
-void f1() {
-        [[dont_unroll]]            while(true) {  }
-}
-
 void main()
 {
         [[unroll]]                 for (int i = 0; i < 8; ++i) { }
-	f0();
+        [[loop]]                   for (;;) { }
+        [[dont_unroll]]            while(true) {  }
         [[dependency_infinite]]    do {  } while(true);
         [[dependency_length(1+3)]] for (int i = 0; i < 8; ++i) { }
         [[flatten]]                if (cond) { } else { }

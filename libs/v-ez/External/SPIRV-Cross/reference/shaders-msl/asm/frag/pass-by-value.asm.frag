@@ -15,7 +15,6 @@ struct main0_out
     float FragColor [[color(0)]];
 };
 
-static inline __attribute__((always_inline))
 float add_value(float v, float w)
 {
     return v + w;

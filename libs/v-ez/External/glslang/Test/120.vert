@@ -201,15 +201,3 @@ int mac;
 
 #define macr(A,B) A ## B
 int macr(qrs,tuv);
-
-layout(std140) uniform BlockName    // ERROR
-{
-    int test;
-};
-
-#extension GL_ARB_uniform_buffer_object : enable
-
-layout(std140) uniform BlockName
-{
-    int test;
-};

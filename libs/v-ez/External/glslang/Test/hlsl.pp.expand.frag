@@ -14,5 +14,4 @@ struct A
 
 void main()
 {
-    "a string"
 }

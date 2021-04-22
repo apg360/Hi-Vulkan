@@ -1,5 +1,4 @@
 #version 310 es
-#extension GL_OES_sample_variables : enable
 precision mediump float;
 in lowp float lowfin;
 in mediump float mediumfin;
@@ -58,7 +57,4 @@ void main()
     
     mediumfout *= s.a;
     mediumfout *= s.b;
-
-    mediumfout = ((mediumfin * mediumfin > 4.2) ? 2.0 * mediumfout : 3.0 * mediumfout);
-    mediumfout = ((gl_SampleMaskIn[0] >> uniform_medium > 0) ? 2.0 * mediumfout : 3.0 * mediumfout);
 }

@@ -22,7 +22,7 @@ float4 samp3(Texture2D<float4> s, SamplerState _s_sampler)
 
 float samp4(Texture2D<float4> s, SamplerComparisonState _s_sampler)
 {
-    return s.SampleCmp(_s_sampler, 1.0f.xxx.xy, 1.0f);
+    return s.SampleCmp(_s_sampler, 1.0f.xxx.xy, 1.0f.xxx.z);
 }
 
 float samp(Texture2D<float4> s0, SamplerState _s0_sampler, Texture2D<float4> s1, SamplerComparisonState _s1_sampler)

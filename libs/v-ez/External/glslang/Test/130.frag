@@ -62,14 +62,12 @@ void bar2()
     b3 < b3;                   // ERROR
     uv3 > uv3;                 // ERROR
     uvec2(2, 3) >= uvec2(3,3); // ERROR
-    int samples = gl_NumSamples; // ERROR
     int(bl4) <= int(bl4);      // true
     int(bl4.x) > int(bl4.y);   // false
 }
 
 #extension GL_ARB_texture_gather : enable
 #extension GL_ARB_texture_rectangle : enable
-#extension GL_ARB_sample_shading : enable
 
 uniform sampler2D samp2D;
 uniform sampler2DShadow samp2DS;
@@ -85,7 +83,6 @@ void bar23()
     s = textureGatherOffset(samp2DA, vec3(0.3), ivec2(1));
     s = textureGatherOffset(samp2DS, vec2(0.3), 1.3, ivec2(1)); // ERROR
     s = textureGatherOffset(samp2D, vec2(0.3), ivec2(1), 2);    // ERROR
-    int samples = gl_NumSamples;
 }
 
 #extension GL_ARB_gpu_shader5 : enable
@@ -170,12 +167,3 @@ void qux2()
 }
 
 layout(early_fragment_tests) out;         // ERROR
-
-#extension GL_ARB_explicit_uniform_location : enable
-
-layout(location = 3) uniform vec4 ucolor0; // ERROR: explicit attrib location is also required for version < 330
-
-#extension GL_ARB_explicit_attrib_location : enable
-
-layout(location = 4) uniform vec4 ucolor1;
-

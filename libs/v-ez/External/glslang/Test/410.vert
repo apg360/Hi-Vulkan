@@ -6,5 +6,4 @@ in dmat4 dm4;
 
 void main()
 {
-    int test = gl_MaxFragmentUniformVectors;
 }

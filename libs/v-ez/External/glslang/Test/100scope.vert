@@ -2,7 +2,7 @@
 
 int f(int a, int b, int c)
 {
-	int a = b;
+	int a = b;  // ERROR, redefinition
 
     {
 		float a = float(a) + 1.0;
