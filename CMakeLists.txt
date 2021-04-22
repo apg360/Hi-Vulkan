@@ -81,9 +81,7 @@ if (Vulkan_FOUND)
 endif (Vulkan_FOUND)
 
 #https://stackoverflow.com/questions/39598323/how-to-properly-link-libraries-with-cmake
-add_library(vez libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64/libVEZ.so)
-#add_subdirectory(libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64 vez)
-target_link_libraries(VulkanKore PUBLIC libVEZ.so)
+target_link_libraries(vez -L${PROJECT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64)
 
 #Volk
 # Set a suitable platform define to compile volk with.
