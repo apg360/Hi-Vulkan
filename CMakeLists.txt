@@ -81,8 +81,8 @@ if (Vulkan_FOUND)
 endif (Vulkan_FOUND)
 
 # 
-#add_subdirectory(libs/v-ez vez)
-#target_link_libraries(VulkanKore PUBLIC vez)
+add_subdirectory(libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64 vez)
+target_link_libraries(VulkanKore PUBLIC vez)
 
 #Volk
 # Set a suitable platform define to compile volk with.
