@@ -53,6 +53,10 @@ struct global_parameters {
 	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	//VkDevice device 				= VK_NULL_HANDLE;
 	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
+    uint32_t enabled_extension_count;
+    uint32_t enabled_layer_count;
+    const char *enabledExtensions[64];
+    const char *enabledLayers[64];
 };
 
 // This is a universal formula to find number of elements present in an array
