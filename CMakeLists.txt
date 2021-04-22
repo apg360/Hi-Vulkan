@@ -80,8 +80,16 @@ if (Vulkan_FOUND)
     message(STATUS "Vulkan_LIBRARIES : " ${Vulkan_LIBRARIES})
 endif (Vulkan_FOUND)
 
-#https://stackoverflow.com/questions/39598323/how-to-properly-link-libraries-with-cmake
-target_link_libraries(vez -L${PROJECT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64)
+# V-EZ
+# https://stackoverflow.com/questions/39598323/how-to-properly-link-libraries-with-cmake
+# https://stackoverflow.com/questions/49816206/cmake-find-package-specify-path
+target_link_libraries(VulkanKore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64/libVEZ.so)
+#find_package(VEZ REQUIRED) #PATHS ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64)
+#if (VEZ_FOUND)
+#    message(STATUS "V-EZ FOUND")
+#    message(STATUS "V-EZ_INCLUDE_DIRS in ${VEZ_INCLUDE_DIR}")
+#    message(STATUS "V-EZ_LIBRARIES : " ${VEZ_LIBRARIES})
+#endif (VEZ_FOUND)
 
 #Volk
 # Set a suitable platform define to compile volk with.

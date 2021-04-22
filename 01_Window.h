@@ -15,7 +15,7 @@ void glfw_error_callback(int error, const char* description)
 }
 //________//________// END
 
-int SetupWindow(struct global_parameters *VulkanKore_param)
+int SetupWindow(struct global_parameters *pVulkanKore_param)
 {
     //Callback functions must be set, so GLFW knows to call them. 
     glfwSetErrorCallback(glfw_error_callback);
@@ -30,10 +30,10 @@ int SetupWindow(struct global_parameters *VulkanKore_param)
     // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
     //glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    VulkanKore_param->windowHandle = glfwCreateWindow(VulkanKore_param->width, VulkanKore_param->height, "Vulkan window", NULL, NULL);
-    //glfwGetX11Window(VulkanKore_param->windowHandle);
+    pVulkanKore_param->windowHandle = glfwCreateWindow(pVulkanKore_param->width, pVulkanKore_param->height, "Vulkan window", NULL, NULL);
+    //glfwGetX11Window(pVulkanKore_param->windowHandle);
     
-    if (VulkanKore_param->windowHandle == NULL )
+    if (pVulkanKore_param->windowHandle == NULL )
     {
       dlg_fatal("GLFW failed to create window");
       glfwTerminate();
