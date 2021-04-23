@@ -61,7 +61,6 @@ endif()
 find_package(GLFW3 REQUIRED)
 if (GLFW3_FOUND)
     message(STATUS "GLFW3 FOUND")
-    #message(STATUS "GLFW3_INCLUDE_DIRS in ${GLFW3_INCLUDE_DIR}")
     target_link_libraries(VulkanKore PUBLIC glfw)
 endif (GLFW3_FOUND)
 
