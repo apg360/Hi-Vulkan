@@ -6,7 +6,7 @@
 //
 //________//________// START
 //Variables and Functions before main function of this step
-VkResult result;
+VkResult vk_error;
 struct global_parameters * local_VulkanKore_param;
 VezApplicationInfo		appInfo 			= {};
 VezInstanceCreateInfo	instanceCreateInfo 	= {};
@@ -27,17 +27,17 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
 	
 	instanceCreateInfo.pApplicationInfo         = &appInfo;
 	
-	result = vezCreateInstance(&instanceCreateInfo, &local_VulkanKore_param->instance);
-	if (result != VK_SUCCESS) return EXIT_FAILURE;
+	vk_error = vezCreateInstance(&instanceCreateInfo, &local_VulkanKore_param->instance);
+	if (vk_error != VK_SUCCESS) return EXIT_FAILURE;
     
-    result = SetupVulkanExtensions();
-    if (result != EXIT_SUCCESS) return EXIT_FAILURE;
+    vk_error = SetupVulkanExtensions();
+    if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
-    result = SetupVulkanLayers();
-    if (result != EXIT_SUCCESS) return EXIT_FAILURE;
+    vk_error = SetupVulkanLayers();
+    if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
-    result = glfwCreateWindowSurface(local_VulkanKore_param->instance, local_VulkanKore_param->windowHandle, NULL, &local_VulkanKore_param->surface);
-	if (result != VK_SUCCESS) return EXIT_FAILURE;
+    vk_error = glfwCreateWindowSurface(local_VulkanKore_param->instance, local_VulkanKore_param->windowHandle, NULL, &local_VulkanKore_param->surface);
+	if (vk_error) return EXIT_FAILURE;
 	
     //--//--//--//
 	//Cleanup (for every "malloc" there must be a "free"
