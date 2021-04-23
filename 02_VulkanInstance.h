@@ -13,6 +13,9 @@ VezInstanceCreateInfo	instanceCreateInfo 	= {};
 
 //________//________// END
 
+int SetupVulkanExtensions();
+int SetupVulkanLayers();
+
 int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
 {
 	local_VulkanKore_param=pVulkanKore_param;
@@ -27,8 +30,11 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
 	result = vezCreateInstance(&instanceCreateInfo, &local_VulkanKore_param->instance);
 	if (result != VK_SUCCESS) return EXIT_FAILURE;
     
-    SetupVulkanExtensions();
-    SetupVulkanLayers();
+    result = SetupVulkanExtensions();
+    if (result != EXIT_SUCCESS) return EXIT_FAILURE;
+    
+    result = SetupVulkanLayers();
+    if (result != EXIT_SUCCESS) return EXIT_FAILURE;
     
     result = glfwCreateWindowSurface(local_VulkanKore_param->instance, local_VulkanKore_param->windowHandle, NULL, &local_VulkanKore_param->surface);
 	if (result != VK_SUCCESS) return EXIT_FAILURE;
