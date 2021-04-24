@@ -123,7 +123,10 @@ struct global_parameters {
 //   it will work for arrays of all data types such as int, char, float etc.
 // We must use define instead of a function. Because An array sent as a parameter to a function is treated as a pointer, 
 //   so sizeof will return the pointer's size, instead of the array's. : void printSizeOf(int intArray[])
-#define COUNT_ARRAY_ELEMS(x) (int) (sizeof(x) / sizeof((x)[0]))
+#define COUNT_ARRAY_ELEMS(x) (int) (  sizeof(x) / sizeof((x)[0])  )
+	/*if ( sizeof((x)[0]) != NULL ) {								\
+		(int) (  sizeof(x) / sizeof((x)[0])  )		\
+	}*/
 
 //Check vulkan error and exit application
 #define ERR_VULKAN_EXIT(val, err_msg)               \

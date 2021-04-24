@@ -74,11 +74,17 @@ int SetupVulkanExtensions() {
 
 int SetupVulkanLayers() {
 	//
-	local_VulkanKore_param->enabledLayers[0] = "VK_LAYER_LUNARG_standard_validation"; // VK_LAYER_KHRONOS_validation or VK_LAYER_LUNARG_standard_validation or "VK_LAYER_NV_optimus"
-	local_VulkanKore_param->enabled_layer_count = COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledLayers);
-	//
 	local_VulkanKore_param->enabled_layer_count = 0;
-    instanceCreateInfo.enabledLayerCount = COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledLayers);
+	local_VulkanKore_param->enabledLayers[0] = "VK_LAYER_LUNARG_standard_validation"; // VK_LAYER_KHRONOS_validation or VK_LAYER_LUNARG_standard_validation or "VK_LAYER_NV_optimus"
+	local_VulkanKore_param->enabled_layer_count = 1; //COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledLayers);
+    
+    //List the enabled Layers
+    dlg_info("Enabled layers count %u",local_VulkanKore_param->enabled_layer_count);
+    for (uint32_t index = 0;  index < local_VulkanKore_param->enabled_layer_count;  index++)
+    {
+        dlg_info("Layer no %u : %s",index,local_VulkanKore_param->enabledLayers[index]);
+    }
+    
     //
     instanceCreateInfo.ppEnabledLayerNames = local_VulkanKore_param->enabledLayers;
     
