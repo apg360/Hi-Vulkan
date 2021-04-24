@@ -24,12 +24,13 @@
 
 struct global_parameters VulkanKore_param;
 
+VkResult result;
+
+int cleanup();
 //# -----------------------------------------------------
 //      Put together all pieces and start Vulkan
 //# -----------------------------------------------------
 int main(int argc, char *argv[]) {
-    
-	int result;
 	
     // Step 1 - Initializing the window
     VulkanKore_param.width  = 800;
@@ -57,7 +58,7 @@ int main(int argc, char *argv[]) {
     SetupPhysicalDevice(instance,
                         &physicalDevice,
                         &device);
-
+     
      // Step 4 - Initialize Swap-Chain     (Section 6.5)
      VkSwapchainKHR swapChain               = NULL;
      VkImage*       presentImages           = NULL;
@@ -74,16 +75,8 @@ int main(int argc, char *argv[]) {
     //dlg_warn("presentImageViews[0] = %p", &presentImageViews[0]); //Debug
     //dlg_warn("presentImageViews[1] = %p", &presentImageViews[1]); //Debug
     
-     // Step 5 - Create Render Pass          (Section 6.6)
-     VkRenderPass    renderPass             = NULL;
-     VkFramebuffer*  frameBuffers           = NULL;
-     SetupRenderPass(device,
-                     physicalDevice,
-                     width,
-                     height,
-                     presentImageViews,
-                     &renderPass,
-                     &frameBuffers);
+// Step 5 - Create Render Pass
+// Not required in V-EZ
 
      // Step 6 - Create Command Pool/Buffer  (Section 6.7)
      VkCommandBuffer  commandBuffer         = NULL;
@@ -115,13 +108,8 @@ int main(int argc, char *argv[]) {
                             &buffer,
                             &memory);
 
-     // Step 9 - Setup Descriptors/Sets      (Section 6.13)
-     VkDescriptorSet       descriptorSet       = NULL;
-     VkDescriptorSetLayout descriptorSetLayout = NULL;
-     SetupDescriptors(device,
-                      buffer,
-                      &descriptorSet,
-                      &descriptorSetLayout);
+// Step 9 - Setup Descriptors/Sets
+// Not required in V-EZ
 
      // Step 10 - Pipeline                   (Section 6.14)
      VkPipeline       pipeline                    = NULL;
@@ -174,24 +162,26 @@ int main(int argc, char *argv[]) {
      }// End while(..)
 
 //______________________
-//The Cleanup
-/*
-     //vkDestroyDebugUtilsMessengerEXT(instance, debugUtilsMessenger, NULL);
-     vkDestroyDebugReportCallbackEXT(instance, debugReportCallback_Warning, NULL);
-     vkDestroyDebugReportCallbackEXT(instance, debugReportCallback_Error, NULL);
-     
-     //Cleanup (for every "malloc" there must be a "free"
-     free(frameBuffers);
-     free(renderPass);
-     free(frameBuffers);
-     free(presentImages);
-     free(presentImageViews);
-
-     vezDestroyInstance(instance); //vkDestroyInstance(instance, NULL);
-*/
-     glfwDestroyWindow(VulkanKore_param.windowHandle);
-     glfwTerminate();
-
+//The Cleanup  (for every "malloc" there must be a "free"
+	result = cleanup();
+	if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
+	
 // End
     return EXIT_SUCCESS;
 }//End WinMain(..)
+
+
+int cleanup() {
+	//The window surface must be destroyed before the specified Vulkan instance. It is the responsibility of the caller to destroy the window surface.
+	//GLFW does not destroy it for you. Call vkDestroySurfaceKHR to destroy the surface.
+	//https://www.glfw.org/docs/latest/group__vulkan.html#ga1a24536bec3f80b08ead18e28e6ae965
+	vkDestroySurfaceKHR(VulkanKore_param.instance, VulkanKore_param.surface, NULL);
+	
+	//
+    vezDestroyInstance(VulkanKore_param.instance); //vkDestroyInstance(instance, NULL);
+	
+    glfwDestroyWindow(VulkanKore_param.windowHandle);
+    glfwTerminate();
+    
+    return EXIT_SUCCESS;
+}

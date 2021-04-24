@@ -11,8 +11,23 @@
 //#include <vector.h>   // std::vector from C++ to C --> "${CMAKE_CURRENT_SOURCE_DIR}/libs/vector"
 //#include "libs/vector_typed_list/vector.h"
 
+//________//________// //________//________// //________//________//
 
-//________//________// //________//________// //________//________// 
+// Note that to avoid symbol conflicts, you have to make sure all translation units in your application include volk.h instead of vulkan.h, 
+//   or that you define VK_NO_PROTOTYPES project-wide to make sure you aren’t accidentally picking up symbols from the real Vulkan loader. 
+#define VK_NO_PROTOTYPES
+
+// Vulkan backtrace error
+#define ENABLE_VULKAN_DEBUG_CALLBACK
+// If you instead want to include the Vulkan header from a custom location
+// Or use your own custom Vulkan header then do this before the GLFW header.
+// => https://www.glfw.org/docs/3.2/vulkan.html
+#include <volk.h>
+
+//V-EZ
+#include <VEZ.h>
+
+//________//________// //________//________// //________//________//
 #define GLFW_INCLUDE_NONE // include no OpenGL header
 
 // GLFW window API macros
@@ -26,23 +41,7 @@
 //GLFW
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h> // https://www.glfw.org/docs/3.0/group__native.html
-//________//________// //________//________// //________//________// 
-
-// Note that to avoid symbol conflicts, you have to make sure all translation units in your application include volk.h instead of vulkan.h, 
-//   or that you define VK_NO_PROTOTYPES project-wide to make sure you aren’t accidentally picking up symbols from the real Vulkan loader. 
-#define VK_NO_PROTOTYPES
-
-// Vulkan backtrace error
-
-#define ENABLE_VULKAN_DEBUG_CALLBACK
-// If you instead want to include the Vulkan header from a custom location
-// Or use your own custom Vulkan header then do this before the GLFW header.
-// => https://www.glfw.org/docs/3.2/vulkan.html
-//#include <volk.h>
-
-//V-EZ
-#include <VEZ.h>
-//________//________// //________//________// //________//________// 
+//________//________// //________//________// //________//________//
 
 struct global_parameters {
     int		width;
