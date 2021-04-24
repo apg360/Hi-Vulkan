@@ -82,7 +82,13 @@ endif (Vulkan_FOUND)
 # V-EZ
 # https://stackoverflow.com/questions/39598323/how-to-properly-link-libraries-with-cmake
 # https://stackoverflow.com/questions/49816206/cmake-find-package-specify-path
-target_link_libraries(VulkanKore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64/libVEZ.so)
+if(CMAKE_SYSTEM_NAME STREQUAL Windows)
+  
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+  target_link_libraries(VulkanKore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64/libVEZ.so)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
+  target_link_libraries(VulkanKore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/macOS.BigSur_11.2.3/x86_64/libVEZ.dylib)
+endif()
 #find_package(VEZ REQUIRED) #PATHS ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64)
 #if (VEZ_FOUND)
 #    message(STATUS "V-EZ FOUND")
