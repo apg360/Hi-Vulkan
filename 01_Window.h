@@ -29,9 +29,11 @@ int SetupWindow(struct global_parameters *pVulkanKore_param)
     
     // Unless you will be using OpenGL or OpenGL ES with the same window as Vulkan, there is no need to create a context.
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); //disable context creation
+    // Window Hints  https://www.glfw.org/docs/latest/window_guide.html#window_hints_x11
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-    pVulkanKore_param->windowHandle = glfwCreateWindow(pVulkanKore_param->width, pVulkanKore_param->height, "Vulkan window", NULL, NULL);
     
+    // Use GLFW to create a window
+    pVulkanKore_param->windowHandle = glfwCreateWindow(pVulkanKore_param->width, pVulkanKore_param->height, "Vulkan window", NULL, NULL);
     if (pVulkanKore_param->windowHandle == NULL )
     {
       dlg_fatal("GLFW failed to create window");
