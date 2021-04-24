@@ -89,12 +89,6 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
   target_link_libraries(VulkanKore PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/macOS.BigSur_11.2.3/x86_64/libVEZ.dylib)
 endif()
-#find_package(VEZ REQUIRED) #PATHS ${CMAKE_CURRENT_SOURCE_DIR}/libs/v-ez/prebuilt_release/Manjaro_21.0/x86_64)
-#if (VEZ_FOUND)
-#    message(STATUS "V-EZ FOUND")
-#    message(STATUS "V-EZ_INCLUDE_DIRS in ${VEZ_INCLUDE_DIR}")
-#    message(STATUS "V-EZ_LIBRARIES : " ${VEZ_LIBRARIES})
-#endif (VEZ_FOUND)
 
 #Volk
 # Set a suitable platform define to compile volk with.
