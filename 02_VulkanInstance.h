@@ -36,15 +36,7 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
     vk_error = SetupVulkanLayers();
     if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
-    /*
-     VkResult glfwCreateWindowSurface
-      ( VkInstance  					instance,
-		GLFWwindow *  					window,
-		const VkAllocationCallbacks *  	allocator,
-		VkSurfaceKHR *  				surface
-	  )
-    */
-    vk_error = glfwCreateWindowSurface(local_VulkanKore_param->instance, local_VulkanKore_param->windowHandle, NULL, &local_VulkanKore_param->surface);
+	vk_error = glfwCreateWindowSurface(local_VulkanKore_param->instance, local_VulkanKore_param->windowHandle, NULL, &local_VulkanKore_param->surface);
 	if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
 	
     //--//--//--//
