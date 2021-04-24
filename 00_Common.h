@@ -11,41 +11,15 @@
 //#include <vector.h>   // std::vector from C++ to C --> "${CMAKE_CURRENT_SOURCE_DIR}/libs/vector"
 //#include "libs/vector_typed_list/vector.h"
 
-//________//________// //________//________// //________//________//
 
-// Note that to avoid symbol conflicts, you have to make sure all translation units in your application include volk.h instead of vulkan.h, 
-//   or that you define VK_NO_PROTOTYPES project-wide to make sure you aren’t accidentally picking up symbols from the real Vulkan loader. 
-#define VK_NO_PROTOTYPES
+/*  * JUST FOR INFORMATION *
 
-// Vulkan backtrace error
-#define ENABLE_VULKAN_DEBUG_CALLBACK
-
-/*
-	=> #define GLFW_INCLUDE_VULKAN
-	By default, GLFW will look for the Vulkan loader on demand at runtime via its standard name (vulkan-1.dll on Windows, libvulkan.so.1 on Linux 
-	and other Unix-like systems and libvulkan.1.dylib on macOS).
-	This means that GLFW does not need to be linked against the loader.
-	However, it also means that if you are using the static library form of the Vulkan loader GLFW will either fail to find it or (worse) use the wrong one.
+	=> VOLK  #define VK_USE_PLATFORM_MACOS_MVK
 	
-	=> Custom loader VOLK
-	If you instead want to include the Vulkan header from a custom location or use your own custom Vulkan header then do this before the GLFW header.
-	
+	The VK_USE_PLATFORM_*_KHR macros do not need to be defined for the Vulkan part of GLFW to work.
+	Define them only if you are using these extensions directly.
 	https://www.glfw.org/docs/latest/vulkan_guide.html
-	https://www.glfw.org/docs/3.2/vulkan.html
-*/
-
-#include <volk.h>
-
-//GLFW
-// The VK_USE_PLATFORM_*_KHR macros do not need to be defined for the Vulkan part of GLFW to work.
-// Define them only if you are using these extensions directly.
-// #define VK_USE_PLATFORM_MACOS_MVK
-// https://www.glfw.org/docs/latest/vulkan_guide.html
-
-#define GLFW_INCLUDE_NONE // include no OpenGL header
-#include <GLFW/glfw3.h>
-
-/*
+	
 	#if defined(VK_USE_PLATFORM_WIN32_KHR)
 	#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
 	#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
@@ -60,8 +34,7 @@
 	#elif defined(VK_USE_PLATFORM_IOS_MVK)
 	#elif defined(VK_USE_PLATFORM_MACOS_MVK)
 	#endif
-*/
-/*
+
 	// Cannot use GLFW "glfwCreateWindowSurface" because "GLFW_INCLUDE_NONE", no OpenGL header
 	// Window surface is created by vulkan, we use VOLK for that
 
@@ -86,19 +59,44 @@
 	extern PFN_vkCreateXlibSurfaceKHR vkCreateXlibSurfaceKHR;
 	extern PFN_vkGetPhysicalDeviceXlibPresentationSupportKHR vkGetPhysicalDeviceXlibPresentationSupportKHR;
 	#endif
-*/
-/*
- * DELETE NOT REQUIRED *
+
 	// GLFW window API macros
-	//#define GLFW_EXPOSE_NATIVE_WIN32 // glfwGetWin32Window (GLFWwindow *window)
-	//#define GLFW_EXPOSE_NATIVE_COCOA // glfwGetCocoaWindow (GLFWwindow *window)
-	//#define GLFW_EXPOSE_NATIVE_X11   // glfwGetX11Window (GLFWwindow *window)
-	//#include <GLFW/glfw3native.h>   // https://www.glfw.org/docs/3.0/group__native.html
+	#define GLFW_EXPOSE_NATIVE_WIN32 // glfwGetWin32Window (GLFWwindow *window)
+	#define GLFW_EXPOSE_NATIVE_COCOA // glfwGetCocoaWindow (GLFWwindow *window)
+	#define GLFW_EXPOSE_NATIVE_X11   // glfwGetX11Window (GLFWwindow *window)
+	#include <GLFW/glfw3native.h>   // https://www.glfw.org/docs/3.0/group__native.html
 	// GLFW context API macros
 	//#define GLFW_EXPOSE_NATIVE_GLX   // glfwGetGLXContext (GLFWwindow *window)
- *******
+
+ ******* ******* ******* ******* */
+
+//________//________// //________//________// //________//________//
+//
+// Note that to avoid symbol conflicts, you have to make sure all translation units in your application include volk.h instead of vulkan.h, 
+//   or that you define VK_NO_PROTOTYPES project-wide to make sure you aren’t accidentally picking up symbols from the real Vulkan loader. 
+#define VK_NO_PROTOTYPES
+
+// Vulkan backtrace error
+#define ENABLE_VULKAN_DEBUG_CALLBACK
+
+/*
+	=> #define GLFW_INCLUDE_VULKAN
+	By default, GLFW will look for the Vulkan loader on demand at runtime via its standard name (vulkan-1.dll on Windows, libvulkan.so.1 on Linux 
+	and other Unix-like systems and libvulkan.1.dylib on macOS).
+	This means that GLFW does not need to be linked against the loader.
+	However, it also means that if you are using the static library form of the Vulkan loader GLFW will either fail to find it or (worse) use the wrong one.
+	
+	=> Custom loader VOLK
+	If you instead want to include the Vulkan header from a custom location or use your own custom Vulkan header then do this before the GLFW header.
+	
+	https://www.glfw.org/docs/latest/vulkan_guide.html
+	https://www.glfw.org/docs/3.2/vulkan.html
 */
 
+#include <volk.h>
+// GLFW
+#define GLFW_INCLUDE_NONE // include no OpenGL header
+#include <GLFW/glfw3.h>
 //________//________// //________//________// //________//________//
 
 //V-EZ
