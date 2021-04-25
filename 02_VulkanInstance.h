@@ -50,6 +50,10 @@ int SetupVulkanExtensions() {
     // Automatically check and list the required extensions for this Vulkan instance to start
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
+    // Resize array to number of elements required
+    //local_VulkanKore_param->enabledExtensions = (char*)malloc(2*sizeof(char)); //realloc(local_VulkanKore_param->enabledExtensions, 2 * sizeof(int));
+    //local_VulkanKore_param->enabledExtensions = malloc(required_extension_count * sizeof *local_VulkanKore_param->enabledExtensions);
+    
     // Build extensions list
     for ( uint32_t index=0; index < required_extension_count; index++) {
         local_VulkanKore_param->enabledExtensions[local_VulkanKore_param->enabled_extension_count] = required_extensions[index];

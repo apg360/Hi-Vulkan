@@ -104,21 +104,6 @@
 
 //________//________// //________//________// //________//________//
 
-struct global_parameters {
-    int		width;
-    int		height;
-	GLFWwindow* windowHandle;
-	VkInstance instance;
-	VkSurfaceKHR surface;
-	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	//VkDevice device 				= VK_NULL_HANDLE;
-	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
-    uint32_t enabled_extension_count;
-    uint32_t enabled_layer_count;
-    const char *enabledExtensions[64];
-    const char *enabledLayers[64];
-};
-
 // This is a universal formula to find number of elements present in an array
 //   it will work for arrays of all data types such as int, char, float etc.
 // We must use define instead of a function. Because An array sent as a parameter to a function is treated as a pointer, 
@@ -201,3 +186,62 @@ void showFPS()
      }
      //assert(false);
 }
+
+/*
+// https://stackoverflow.com/questions/3536153/c-dynamically-growing-array/3536261
+// https://stackoverflow.com/questions/26831981/should-i-check-if-malloc-was-successful
+// http://www.cplusplus.com/reference/cstdlib/realloc
+// https://overiq.com/c-programming-101/the-realloc-function-in-c
+Array a;
+
+initArray(&a, 5);  // initially 5 elements
+for (int i = 0; i < 100; i++)
+  insertArray(&a, i);  // automatically resizes as necessary
+printf("%d\n", a.array[9]);  // print 10th element
+printf("%d\n", a.used);  // print number of elements
+freeArray(&a);
+*/
+typedef struct {
+  int *array;
+  size_t used;
+  size_t size;
+} myArray;
+
+void initArray(myArray *a, size_t initialSize) {
+  a->array = malloc(initialSize * sizeof(int));
+  a->used = 0;
+  a->size = initialSize;
+}
+
+void insertArray(myArray *a, int element) {
+  // a->used is the number of used entries, because a->array[a->used++] updates a->used only *after* the array has been accessed.
+  // Therefore a->used can go up to a->size 
+  if (a->used == a->size) {
+    a->size *= 2;
+    a->array = realloc(a->array, a->size * sizeof(int));
+  }
+  a->array[a->used++] = element;
+}
+
+void freeArray(myArray *a) {
+  free(a->array);
+  a->array = NULL;
+  a->used = a->size = 0;
+}
+
+
+//-------------------------------
+struct global_parameters {
+    int		width;
+    int		height;
+	GLFWwindow* windowHandle;
+	VkInstance instance;
+	VkSurfaceKHR surface;
+	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+	//VkDevice device 				= VK_NULL_HANDLE;
+	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
+    uint32_t enabled_extension_count;
+    uint32_t enabled_layer_count;
+    const char *enabledExtensions[2];
+    const char *enabledLayers[1];
+};
