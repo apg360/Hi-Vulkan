@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     VulkanKore_param.physicalDeviceCount = 0;
     result = SetupPhysicalDevice(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
-        dlg_fatal( "Failed to setup GPU.\n");
+        dlg_fatal( "Failed to setup GPU.\n" );
         return EXIT_FAILURE;
     }
     
