@@ -48,40 +48,35 @@ int SetupVulkanExtensions() {
     local_VulkanKore_param->enabled_extension_count = 0;
     uint32_t required_extension_count = 0;
     
-    // *test = array of character, **test = array of string, 2-dimensional array of characters
-    // array of string,  **enabledExtensions = *enabledExtensions[2]
-    //variable char*   = string                         => char *y = "ABC";
-    //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
-    
     // Automatically check and list the required extensions for this Vulkan instance to start
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
-    
-    array_copy(required_extension_count, required_extensions, local_VulkanKore_param->enabledExtensions);
     local_VulkanKore_param->enabled_extension_count = required_extension_count;
     
-    dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
+    //resize array size
+    local_VulkanKore_param->enabledExtensions = malloc( sizeof(char*) * local_VulkanKore_param->enabled_extension_count );
+    
+    local_VulkanKore_param->enabledExtensions = required_extensions;
     
     //List the enabled extensions to log file
 	log_array_list_item(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions,"Extensions Enabled");
     
     //
-    instanceCreateInfo.enabledExtensionCount           = COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledExtensions);
+    instanceCreateInfo.enabledExtensionCount           = local_VulkanKore_param->enabled_extension_count;
     instanceCreateInfo.ppEnabledExtensionNames         = local_VulkanKore_param->enabledExtensions;
     
     return EXIT_SUCCESS;
 }
 
 int SetupVulkanLayers() {
-    //
+    local_VulkanKore_param->enabled_layer_count = 1;
+    //resize array size
+    local_VulkanKore_param->enabledLayers = malloc( sizeof(char*) * local_VulkanKore_param->enabled_layer_count );
+    
     // VK_LAYER_KHRONOS_validation or VK_LAYER_LUNARG_standard_validation or "VK_LAYER_NV_optimus"
     local_VulkanKore_param->enabledLayers[0] = "VK_LAYER_LUNARG_standard_validation";
     
-    local_VulkanKore_param->enabled_layer_count = 1;
-    //local_VulkanKore_param->enabled_layer_count = COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledLayers);
-    
-    
     //List the enabled Layers to log file
-    //log_array_list_item(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers,"Layers enabled");
+    log_array_list_item(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers,"Layers enabled");
     
     //
     instanceCreateInfo.ppEnabledLayerNames = local_VulkanKore_param->enabledLayers;

@@ -282,11 +282,15 @@ struct global_parameters {
 	VkInstance instance;
 	VkSurfaceKHR surface;
 	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	//VkDevice device 				= VK_NULL_HANDLE;
-	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
+	//VkDevice device 				  = VK_NULL_HANDLE;
+	//VezSwapchain swapchain 		  = VK_NULL_HANDLE;
+	
+    // *test = array of character, **test = array of string, 2-dimensional array of characters
+    // array of string,  **enabledExtensions = *enabledExtensions[2]
+    //variable char*   = string                         => char *y = "ABC";
+    //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
     uint32_t enabled_extension_count;
-    const char *enabledExtensions[2];
-    
+    const char **enabledExtensions;
     uint32_t enabled_layer_count;
-    const char *enabledLayers[1];
+    const char **enabledLayers;
 };
