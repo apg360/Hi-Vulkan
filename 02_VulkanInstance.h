@@ -44,25 +44,19 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
 }// END SetupVulkanInstance()
 
 int SetupVulkanExtensions() {
-    //Initialize or reset value
+    //Initialize and reset to default value
     local_VulkanKore_param->enabled_extension_count = 0;
     uint32_t required_extension_count = 0;
+    
     // Automatically check and list the required extensions for this Vulkan instance to start
     //variable char*   = string                         => char *y = "ABC";
     //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
-    const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
+    //const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
-    // Resize array to number of elements required
-    //local_VulkanKore_param->enabledExtensions = malloc( required_extension_count * sizeof(local_VulkanKore_param->enabledExtensions) );
-    //strcpy( (array_dest)[index], (array_source)[index] );
-    
-    //const char *s[required_extension_count]; 		//array of string, create number of items with NULL values.
-    //local_VulkanKore_param->enabledExtensions = malloc( sizeof(s) );  //copy local array to our global param
-    dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
-    
-    // Build extensions list
-    array_copy(required_extension_count,required_extensions,local_VulkanKore_param->enabledExtensions);
+    local_VulkanKore_param->enabledExtensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     local_VulkanKore_param->enabled_extension_count = required_extension_count;
+    
+    dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
     
     //List the enabled extensions to log file
 	log_array_list_item(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions,"Extensions Enabled");

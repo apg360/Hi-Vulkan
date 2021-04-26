@@ -287,6 +287,6 @@ struct global_parameters {
     uint32_t enabled_extension_count;
     uint32_t enabled_layer_count;
     // *test = array of character, **test = array of string, 2-dimensional array of characters
-    const char *enabledExtensions[2];	//array of string,  **enabledExtensions = *enabledExtensions[2]
+    const char **enabledExtensions;	//array of string,  **enabledExtensions = *enabledExtensions[2]
     const char *enabledLayers[1];		//array of string,  **enabledLayers     = *enabledLayers[1]
 };
