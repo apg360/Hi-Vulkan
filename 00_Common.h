@@ -293,6 +293,7 @@ struct global_parameters {
     
     //
     uint32_t 			physicalDeviceCount;
+    VkPhysicalDevice    *physicalDevices;
     VkPhysicalDevice 	physicalDevice;
     VkDevice         	device;
     

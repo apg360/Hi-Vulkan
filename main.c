@@ -54,9 +54,14 @@ int main(int argc, char *argv[]) {
     }
     
     // Step 3 - Find/Create GPU Device and setup your selected device
-    VulkanKore_param.physicalDevice		= VK_NULL_HANDLE;
-    VulkanKore_param.device				= VK_NULL_HANDLE;
-    SetupPhysicalDevice(&VulkanKore_param);
+    VulkanKore_param.physicalDevice		 = VK_NULL_HANDLE;
+    VulkanKore_param.device				 = VK_NULL_HANDLE;
+    VulkanKore_param.physicalDeviceCount = 0;
+    result = SetupPhysicalDevice(&VulkanKore_param);
+    if ( result == EXIT_FAILURE ) {
+        dlg_fatal( "Failed to setup GPU.\n" );
+        return EXIT_FAILURE;
+    }
     
     /* 
      // Step 4 - Initialize Swap-Chain     (Section 6.5)
