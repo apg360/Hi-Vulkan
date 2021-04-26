@@ -20,6 +20,13 @@ int SetupWindow(struct global_parameters *pVulkanKore_param)
     //Callback functions must be set, so GLFW knows to call them. 
     glfwSetErrorCallback(glfw_error_callback);
     
+    /*
+    glfwSetWindowUserPointer(demo->window, demo);
+    glfwSetWindowRefreshCallback(demo->window, demo_refresh_callback);
+    glfwSetFramebufferSizeCallback(demo->window, demo_resize_callback);
+    glfwSetKeyCallback(demo->window, demo_key_callback);
+    */
+    
     // Initialise GLFW
     if( !glfwInit() )
     {
