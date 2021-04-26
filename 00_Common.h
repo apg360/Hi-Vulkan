@@ -285,8 +285,8 @@ struct global_parameters {
 	//VkDevice device 				= VK_NULL_HANDLE;
 	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
     uint32_t enabled_extension_count;
-    uint32_t enabled_layer_count;
-    //Flexible Array Member(FAM) => https://www.geeksforgeeks.org/flexible-array-members-structure-c
     const char *enabledExtensions[2];
-    const char *enabledLayers[];
+    
+    uint32_t enabled_layer_count;
+    const char *enabledLayers[1];
 };
