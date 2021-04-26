@@ -282,14 +282,15 @@ struct global_parameters {
 	//VkDevice device 				  = VK_NULL_HANDLE;
 	//VezSwapchain swapchain 		  = VK_NULL_HANDLE;
 	
-    // array of string, 2-dimensional array of characters
+	// Pointer or array ?
     // *test = array of character
-    // **test = array of string,
+    // **test = array of string
     // **test is same as *test[2]
-    //variable char*   = string                         => char *y = "ABC";
-    //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
+    //
+    // variable char*   = a string OR character pointer     => char *y = "ABC";
+    // variable char**  = array of string OR string pointer => char **y = {"ABC", "DEF", "GHI", 123};
     uint32_t enabled_extension_count;
-    const char **enabledExtensions;
+    const char **enabledExtensions; // array of string, 2-dimensional array of characters
     uint32_t enabled_layer_count;
-    const char **enabledLayers;
+    const char **enabledLayers;		// array of string, 2-dimensional array of characters
 };
