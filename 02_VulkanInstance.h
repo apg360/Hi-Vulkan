@@ -51,9 +51,9 @@ int SetupVulkanExtensions() {
     // Automatically check and list the required extensions for this Vulkan instance to start
     //variable char*   = string                         => char *y = "ABC";
     //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
-    //const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
+    const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
-    local_VulkanKore_param->enabledExtensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
+    array_copy(required_extension_count, required_extensions, local_VulkanKore_param->enabledExtensions);
     local_VulkanKore_param->enabled_extension_count = required_extension_count;
     
     dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
