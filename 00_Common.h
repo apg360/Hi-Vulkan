@@ -286,7 +286,7 @@ struct global_parameters {
 	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
     uint32_t enabled_extension_count;
     uint32_t enabled_layer_count;
-    // *test = array of character, **test = array of string
-    const char *enabledExtensions[2];		//array of string,  **enabledExtensions = *enabledExtensions[2]
+    // *test = array of character, **test = array of string, 2-dimensional array of characters
+    const char *enabledExtensions[2];	//array of string,  **enabledExtensions = *enabledExtensions[2]
     const char *enabledLayers[1];		//array of string,  **enabledLayers     = *enabledLayers[1]
 };

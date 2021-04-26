@@ -54,6 +54,7 @@ int SetupVulkanExtensions() {
     
     // Resize array to number of elements required
     //local_VulkanKore_param->enabledExtensions = malloc( required_extension_count * sizeof(local_VulkanKore_param->enabledExtensions) );
+    //strcpy( (array_dest)[index], (array_source)[index] );
     
     //const char *s[required_extension_count]; 		//array of string, create number of items with NULL values.
     //local_VulkanKore_param->enabledExtensions = malloc( sizeof(s) );  //copy local array to our global param
