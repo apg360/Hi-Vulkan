@@ -138,6 +138,14 @@
         exit(1);                                    \
     } while (0)
 
+//List all array items
+#define log_list_array_items(count, array, msg)                 \
+    dlg_info("%s count %u",msg,count);			\
+    for (uint32_t index = 0;  index < count;  index++)		\
+    {														\
+        dlg_info("%s no %u : %s",msg,index,array[index]);	\
+    }
+
 /*
     dlg_warn("This is a warning. If on a console, it will be printed yellow");
     dlg_error("Errors are red. Colors work even on windows consoles");
@@ -272,8 +280,7 @@ struct global_parameters {
 	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
     uint32_t enabled_extension_count;
     uint32_t enabled_layer_count;
-    //https://www.geeksforgeeks.org/flexible-array-members-structure-c/
-    const char *enabledExtensions[2];
-    const char *enabledLayers[1];
-    char *test;
+    // *test = array of character, **test = array of string
+    const char *enabledExtensions[2];		//array of string,  **enabledExtensions = *enabledExtensions[2]
+    const char *enabledLayers[1];		//array of string,  **enabledLayers     = *enabledLayers[1]
 };

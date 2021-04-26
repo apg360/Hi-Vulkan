@@ -48,20 +48,13 @@ int SetupVulkanExtensions() {
     local_VulkanKore_param->enabled_extension_count = 0;
     uint32_t required_extension_count = 0;
     // Automatically check and list the required extensions for this Vulkan instance to start
-    //variable char*   = string                                           => char *y = "ABC";
-    //variable char**  = string pointer / string array					  => char **y = {"ABC", "DEF", "GHI", 123};
-    //function argument char*** = reference value to string array
-    //char*** reference to string array
+    //variable char*   = string                         => char *y = "ABC";
+    //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
     // Resize array to number of elements required
-    char *s[required_extension_count];
-    local_VulkanKore_param->test = s;
-    for (uint32_t index = 0;  index < required_extension_count;  index++)
-    {
-		//(local_VulkanKore_param->test)[0] = &required_extensions;
-        dlg_warn("test no %u : %c",index,local_VulkanKore_param->test[index]);
-    }
+    //const char *s[required_extension_count]; 		//array of string, create number of items with NULL values.
+    //local_VulkanKore_param->enabledExtensions = s;  //copy local array to our global param
     
     // Build extensions list
     for ( uint32_t index=0; index < required_extension_count; index++) {
@@ -69,12 +62,8 @@ int SetupVulkanExtensions() {
         local_VulkanKore_param->enabled_extension_count++;
     }
     
-    //List the enabled extensions
-    dlg_info("Enabled extension count %u",local_VulkanKore_param->enabled_extension_count);
-    for (uint32_t index = 0;  index < local_VulkanKore_param->enabled_extension_count;  index++)
-    {
-        dlg_info("Extensions no %u : %s",index,local_VulkanKore_param->enabledExtensions[index]);
-    }
+    //List the enabled extensions to log file
+	log_list_array_items(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions,"Extensions Enabled");
     
     //
     instanceCreateInfo.enabledExtensionCount           = COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledExtensions);
@@ -89,12 +78,8 @@ int SetupVulkanLayers() {
     local_VulkanKore_param->enabledLayers[0] = "VK_LAYER_LUNARG_standard_validation"; // VK_LAYER_KHRONOS_validation or VK_LAYER_LUNARG_standard_validation or "VK_LAYER_NV_optimus"
     local_VulkanKore_param->enabled_layer_count = 1; //COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledLayers);
     
-    //List the enabled Layers
-    dlg_info("Enabled layers count %u",local_VulkanKore_param->enabled_layer_count);
-    for (uint32_t index = 0;  index < local_VulkanKore_param->enabled_layer_count;  index++)
-    {
-        dlg_info("Layer no %u : %s",index,local_VulkanKore_param->enabledLayers[index]);
-    }
+    //List the enabled Layers to log file
+    log_list_array_items(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers,"Layers enabled");
     
     //
     instanceCreateInfo.ppEnabledLayerNames = local_VulkanKore_param->enabledLayers;
