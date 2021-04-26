@@ -256,7 +256,7 @@ typedef struct Array {
 } myArray2;
 
 myArray2 *create_array (int capacity);
-void arr_append(Array *arr, char *element);
+void arr_append(struct Array *arr, char *element);
 
 
 
@@ -275,4 +275,5 @@ struct global_parameters {
     //https://www.geeksforgeeks.org/flexible-array-members-structure-c/
     const char *enabledExtensions[2];
     const char *enabledLayers[1];
+    char *test;
 };

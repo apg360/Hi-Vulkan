@@ -48,11 +48,20 @@ int SetupVulkanExtensions() {
     local_VulkanKore_param->enabled_extension_count = 0;
     uint32_t required_extension_count = 0;
     // Automatically check and list the required extensions for this Vulkan instance to start
+    //variable char*   = string                                           => char *y = "ABC";
+    //variable char**  = string pointer / string array					  => char **y = {"ABC", "DEF", "GHI", 123};
+    //function argument char*** = reference value to string array
+    //char*** reference to string array
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
     // Resize array to number of elements required
-    //local_VulkanKore_param->enabledExtensions = (char*)malloc(2*sizeof(char)); //realloc(local_VulkanKore_param->enabledExtensions, 2 * sizeof(int));
-    //local_VulkanKore_param->enabledExtensions = malloc(required_extension_count * sizeof *local_VulkanKore_param->enabledExtensions);
+    char *s[required_extension_count];
+    local_VulkanKore_param->test = s;
+    for (uint32_t index = 0;  index < required_extension_count;  index++)
+    {
+		//(local_VulkanKore_param->test)[0] = &required_extensions;
+        dlg_warn("test no %u : %c",index,local_VulkanKore_param->test[index]);
+    }
     
     // Build extensions list
     for ( uint32_t index=0; index < required_extension_count; index++) {
