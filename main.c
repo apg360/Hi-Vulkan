@@ -33,8 +33,8 @@ int cleanup();
 int main(int argc, char *argv[]) {
 	
     // Step 1 - Initializing the window
-    VulkanKore_param.width  = 800;
-    VulkanKore_param.height = 600;
+    VulkanKore_param.windowSizeWidth  = 800;
+    VulkanKore_param.windowSizeHeight = 600;
     result = SetupWindow(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
         dlg_fatal( "Failed to open GLFW window.\n" );

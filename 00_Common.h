@@ -273,7 +273,7 @@ void arr_append(struct Array *arr, char *element);
 
 //-------------------------------
 struct global_parameters {
-    int					windowSizeWidth;
+    int					windowSizeWidth; 
     int					windowSizeHeight;
 	GLFWwindow* 		windowHandle;
 	VkInstance 			instance;

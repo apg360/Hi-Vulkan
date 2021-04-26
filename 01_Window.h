@@ -42,7 +42,7 @@ int SetupWindow(struct global_parameters *pVulkanKore_param)
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     
     // Use GLFW to create a window
-    pVulkanKore_param->windowHandle = glfwCreateWindow(pVulkanKore_param->width, pVulkanKore_param->height, "Vulkan window", NULL, NULL);
+    pVulkanKore_param->windowHandle = glfwCreateWindow(pVulkanKore_param->windowSizeWidth, pVulkanKore_param->windowSizeHeight, "Vulkan window", NULL, NULL);
     if (pVulkanKore_param->windowHandle == NULL )
     {
       dlg_fatal("GLFW failed to create window");
