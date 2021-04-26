@@ -139,8 +139,8 @@
     } while (0)
 
 //List all array items
-#define log_list_array_items(count, array, msg)                 \
-    dlg_info("%s count %u",msg,count);			\
+#define log_list_array_items(count, array, msg)             \
+    dlg_info("%s count %u",msg,count);			            \
     for (uint32_t index = 0;  index < count;  index++)		\
     {														\
         dlg_info("%s no %u : %s",msg,index,array[index]);	\
@@ -281,6 +281,6 @@ struct global_parameters {
     uint32_t enabled_extension_count;
     uint32_t enabled_layer_count;
     // *test = array of character, **test = array of string
-    const char *enabledExtensions[2];		//array of string,  **enabledExtensions = *enabledExtensions[2]
+    const char *enabledExtensions[0];		//array of string,  **enabledExtensions = *enabledExtensions[2]
     const char *enabledLayers[1];		//array of string,  **enabledLayers     = *enabledLayers[1]
 };
