@@ -2,7 +2,7 @@
 #pragma once // include guard
 
 //# -----------------------------------------------------
-// Step 1 - Window
+// Step 1 - GLFW window, context, keyboard, mouse
 
 //________//________// 
 // Definition Variables and Functions before main function of this step

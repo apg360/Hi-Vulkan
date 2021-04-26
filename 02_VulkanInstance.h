@@ -2,7 +2,7 @@
 #pragma once // include guard
 
 //# -----------------------------------------------------
-// Step 2 - Initialize Vulkan
+// Step 2 - Initialize V-EZ Vulkan
 //
 //________//________// START
 //Variables and Functions before main function of this step
