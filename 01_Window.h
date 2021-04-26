@@ -21,6 +21,8 @@ int SetupWindow(struct global_parameters *pVulkanKore_param)
     glfwSetErrorCallback(glfw_error_callback);
     
     /*
+    TODO
+    
     glfwSetWindowUserPointer(demo->window, demo);
     glfwSetWindowRefreshCallback(demo->window, demo_refresh_callback);
     glfwSetFramebufferSizeCallback(demo->window, demo_resize_callback);
