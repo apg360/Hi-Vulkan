@@ -72,6 +72,7 @@ int SetupVulkanLayers() {
     uint32_t required_layers_count = 0;
     
     //
+    //vezEnumerateDeviceLayerProperties
     required_layers_count = 1;
     
     // Initialize number of elements in array
