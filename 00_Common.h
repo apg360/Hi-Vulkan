@@ -104,6 +104,18 @@
 
 //________//________// //________//________// //________//________//
 
+
+/*
+    dlg_warn("This is a warning. If on a console, it will be printed yellow");
+    dlg_error("Errors are red. Colors work even on windows consoles");
+    dlg_info("Another feature: Utf-8 printing works automatically, even for שׁǐŉďốẅś consoles");
+    dlg_fatal("This one is printed bold. For more information, read the example already");
+    dlg_assertm(1 == 2, "Well, this assertion will probably %s...", "fail");
+    dlg_infot(("tag1", "tag2"), "We can tag our stuff. Can be used to filter/redirect messages");
+    dlg_asserttm(("tag3"), 3 == 2, "The same goes for asserts");
+*/
+
+
 // This is a universal formula to find number of elements present in an array
 //   it will work for arrays of all data types such as int, char, float etc.
 // We must use define instead of a function. Because An array sent as a parameter to a function is treated as a pointer, 
@@ -148,16 +160,6 @@
     {														\
         dlg_info("%s no %u : %s",msg,index,array[index]);	\
     }
-
-/*
-    dlg_warn("This is a warning. If on a console, it will be printed yellow");
-    dlg_error("Errors are red. Colors work even on windows consoles");
-    dlg_info("Another feature: Utf-8 printing works automatically, even for שׁǐŉďốẅś consoles");
-    dlg_fatal("This one is printed bold. For more information, read the example already");
-    dlg_assertm(1 == 2, "Well, this assertion will probably %s...", "fail");
-    dlg_infot(("tag1", "tag2"), "We can tag our stuff. Can be used to filter/redirect messages");
-    dlg_asserttm(("tag3"), 3 == 2, "The same goes for asserts");
-*/
 
 int fps_nbFrames = 0;
 double fps_lastTime = 0;
