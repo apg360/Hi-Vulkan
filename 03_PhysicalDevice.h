@@ -12,12 +12,16 @@ VezDeviceCreateInfo		deviceCreateInfo 	= {};
 //________//________// END
 
 int ScanGPUs();
+int gpuQueue();
 
 int SetupPhysicalDevice(struct global_parameters *pVulkanKore_param)
 {
 	local_VulkanKore_param=pVulkanKore_param;
 	
 	vk_error = ScanGPUs();
+    if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
+    
+    vk_error = gpuQueue();
     if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
     // Create a logical device connection to the physical device.
@@ -73,4 +77,31 @@ int ScanGPUs() {
     if (local_VulkanKore_param->physicalDevice == VK_NULL_HANDLE) {dlg_error("Couldn't select any discrete GPU device"); return EXIT_FAILURE;}
         
     return EXIT_SUCCESS;
+}
+
+int gpuQueue() {
+	
+	/*
+	// Fill up the physical device memory properties:
+	VkPhysicalDeviceMemoryProperties memoryProperties;
+	vkGetPhysicalDeviceMemoryProperties( *outPhysicalDevice,
+										 // handle to the device query
+										 &memoryProperties);
+										 // pointer to VkPhysicalDeviceMemoryProperties structure returned with properties
+	// Here's where you initialize your queues
+	// You'll discuss queues next - however, you need to specify the queue
+	// details for the device creation info
+	VkDeviceQueueCreateInfo queueCreateInfo = {};
+	queueCreateInfo.sType              = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	// Use the first queue family in the family list
+	queueCreateInfo.queueFamilyIndex   = 0;
+	queueCreateInfo.queueCount         = 1;
+	float queuePriorities[]            = { 1.0f };
+	queueCreateInfo.pQueuePriorities   = queuePriorities;
+	
+	// Same extension you specified when initializing Vulkan
+	const char *deviceExtensions[]     = { "VK_KHR_swapchain" };
+	const char *layers[]               = { "VK_LAYER_KHRONOS_validation" }; // "VK_LAYER_LUNARG_standard_validation" or "VK_LAYER_NV_optimus"
+	*/
+	return EXIT_SUCCESS;
 }
