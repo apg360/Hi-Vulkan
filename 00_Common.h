@@ -139,7 +139,13 @@
     } while (0)
 
 //List all array items
-#define log_list_array_items(count, array, msg)             \
+#define array_copy(count, array_source, array_dest)         \
+    for ( uint32_t index=0; index < count; index++) {		\
+        (array_dest)[index] = (array_source)[index];		\
+    }
+
+//List all array items
+#define log_array_list_item(count, array, msg)             \
     dlg_info("%s count %u",msg,count);			            \
     for (uint32_t index = 0;  index < count;  index++)		\
     {														\
@@ -281,6 +287,6 @@ struct global_parameters {
     uint32_t enabled_extension_count;
     uint32_t enabled_layer_count;
     // *test = array of character, **test = array of string
-    const char *enabledExtensions[0];		//array of string,  **enabledExtensions = *enabledExtensions[2]
+    const char *enabledExtensions[2];		//array of string,  **enabledExtensions = *enabledExtensions[2]
     const char *enabledLayers[1];		//array of string,  **enabledLayers     = *enabledLayers[1]
 };

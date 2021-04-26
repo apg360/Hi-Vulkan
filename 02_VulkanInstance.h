@@ -53,21 +53,18 @@ int SetupVulkanExtensions() {
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
     // Resize array to number of elements required
-    *(local_VulkanKore_param->enabledExtensions) = malloc( required_extension_count * sizeof(local_VulkanKore_param->enabledExtensions) );
-    
-    dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
+    //local_VulkanKore_param->enabledExtensions = malloc( required_extension_count * sizeof(local_VulkanKore_param->enabledExtensions) );
     
     //const char *s[required_extension_count]; 		//array of string, create number of items with NULL values.
-    //local_VulkanKore_param->enabledExtensions = s;  //copy local array to our global param
+    //local_VulkanKore_param->enabledExtensions = malloc( sizeof(s) );  //copy local array to our global param
+    dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
     
     // Build extensions list
-    for ( uint32_t index=0; index < required_extension_count; index++) {
-        (local_VulkanKore_param->enabledExtensions)[index] = required_extensions[index];
-        local_VulkanKore_param->enabled_extension_count++;
-    }
+    array_copy(required_extension_count,required_extensions,local_VulkanKore_param->enabledExtensions);
+    local_VulkanKore_param->enabled_extension_count = required_extension_count;
     
     //List the enabled extensions to log file
-	log_list_array_items(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions,"Extensions Enabled");
+	log_array_list_item(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions,"Extensions Enabled");
     
     //
     instanceCreateInfo.enabledExtensionCount           = COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledExtensions);
@@ -83,7 +80,7 @@ int SetupVulkanLayers() {
     local_VulkanKore_param->enabled_layer_count = 1; //COUNT_ARRAY_ELEMS(local_VulkanKore_param->enabledLayers);
     
     //List the enabled Layers to log file
-    log_list_array_items(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers,"Layers enabled");
+    log_array_list_item(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers,"Layers enabled");
     
     //
     instanceCreateInfo.ppEnabledLayerNames = local_VulkanKore_param->enabledLayers;
