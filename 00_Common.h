@@ -104,7 +104,6 @@
 
 //________//________// //________//________// //________//________//
 
-
 /*
     dlg_warn("This is a warning. If on a console, it will be printed yellow");
     dlg_error("Errors are red. Colors work even on windows consoles");
@@ -114,7 +113,6 @@
     dlg_infot(("tag1", "tag2"), "We can tag our stuff. Can be used to filter/redirect messages");
     dlg_asserttm(("tag3"), 3 == 2, "The same goes for asserts");
 */
-
 
 // This is a universal formula to find number of elements present in an array
 //   it will work for arrays of all data types such as int, char, float etc.
