@@ -11,13 +11,13 @@ struct global_parameters * local_VulkanKore_param;
 VezDeviceCreateInfo		deviceCreateInfo 	= {};
 //________//________// END
 
-int ScanGPU();
+int ScanGPUs();
 
 int SetupPhysicalDevice(struct global_parameters *pVulkanKore_param)
 {
 	local_VulkanKore_param=pVulkanKore_param;
 	
-	vk_error = ScanGPU();
+	vk_error = ScanGPUs();
     if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
     // Create a logical device connection to the physical device.
@@ -32,7 +32,7 @@ int SetupPhysicalDevice(struct global_parameters *pVulkanKore_param)
 	return EXIT_SUCCESS;
 }// END SetupPhysicalDevice(..)
 
-int ScanGPU() {
+int ScanGPUs() {
 	// Enumerate GPU physical device
     vk_error = vezEnumeratePhysicalDevices(local_VulkanKore_param->instance, &local_VulkanKore_param->physicalDeviceCount, NULL);
     if(local_VulkanKore_param->physicalDeviceCount == 0) { dlg_error("Couldn't detect any device present with Vulkan support"); return EXIT_FAILURE;} 
