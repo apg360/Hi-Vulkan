@@ -53,12 +53,16 @@ int SetupVulkanExtensions() {
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
     // Resize array to number of elements required
+    *(local_VulkanKore_param->enabledExtensions) = malloc( required_extension_count * sizeof(local_VulkanKore_param->enabledExtensions) );
+    
+    dlg_info("count no : %u",COUNT_ARRAY_ELEMS( local_VulkanKore_param->enabledExtensions ));
+    
     //const char *s[required_extension_count]; 		//array of string, create number of items with NULL values.
     //local_VulkanKore_param->enabledExtensions = s;  //copy local array to our global param
     
     // Build extensions list
     for ( uint32_t index=0; index < required_extension_count; index++) {
-        local_VulkanKore_param->enabledExtensions[local_VulkanKore_param->enabled_extension_count] = required_extensions[index];
+        (local_VulkanKore_param->enabledExtensions)[index] = required_extensions[index];
         local_VulkanKore_param->enabled_extension_count++;
     }
     
