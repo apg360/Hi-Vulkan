@@ -187,6 +187,25 @@ void showFPS()
      //assert(false);
 }
 
+// https://stackoverflow.com/questions/6169972/realloc-an-array-of-structs
+/*int growArray(User **user_array, int currentSize, int numNewElems)
+{
+    const int totalSize = currentSize + numNewElems;
+    User *temp = (User*)realloc(*user_array, (totalSize * sizeof(User)));
+
+    if (temp == NULL)
+    {
+        printf("Cannot allocate more memory.\n");
+        return 0;
+    }
+    else
+    {
+        *user_array = temp;
+    }
+
+    return totalSize;
+}*/
+
 /*
 // https://stackoverflow.com/questions/3536153/c-dynamically-growing-array/3536261
 // https://stackoverflow.com/questions/26831981/should-i-check-if-malloc-was-successful
@@ -230,6 +249,17 @@ void freeArray(myArray *a) {
 }
 
 
+typedef struct Array {
+  int capacity;  	// How many elements can this array hold?
+  int count;  		// How many states does the array currently hold?
+  char **elements;  // The string elements contained in the array
+} myArray2;
+
+myArray2 *create_array (int capacity);
+void arr_append(Array *arr, char *element);
+
+
+
 //-------------------------------
 struct global_parameters {
     int		width;
@@ -242,6 +272,7 @@ struct global_parameters {
 	//VezSwapchain swapchain 			= VK_NULL_HANDLE;
     uint32_t enabled_extension_count;
     uint32_t enabled_layer_count;
+    //https://www.geeksforgeeks.org/flexible-array-members-structure-c/
     const char *enabledExtensions[2];
     const char *enabledLayers[1];
 };
