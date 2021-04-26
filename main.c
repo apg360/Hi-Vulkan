@@ -9,9 +9,9 @@
 #include "00_Common.h"                // <-- Includes required for everything
 #include "01_Window.h"                // <-- GLFW window, context, keyboard, mouse
 #include "02_VulkanInstance.h"        // <-- Initialize V-EZ Vulkan
+#include "03_PhysicalDevice.h"        // <-- Find/Create GPU Device and setup your selected device
 
 /*
-#include "03_PhysicalDevice.h"        // <-- (Section 6.4)  Find/Create Device and Set-up your selected device
 #include "04_SwapChain.h"             // <-- (Section 6.5)  Initialize Swap-Chain
 #include "05_RenderPass.h"            // <-- (Section 6.6)  Create Render Pass
 #include "06_CommandBuffer.h"         // <-- (Section 6.7)  Create Command Pool/Buffer
@@ -42,23 +42,23 @@ int main(int argc, char *argv[]) {
     }
     
     // Step 2 - Initialize Vulkan
-    VulkanKore_param.instance = VK_NULL_HANDLE;
-    VulkanKore_param.surface  = VK_NULL_HANDLE;
+    VulkanKore_param.instance 	= VK_NULL_HANDLE;
+    VulkanKore_param.surface  	= VK_NULL_HANDLE;
+    VulkanKore_param.enabled_extension_count 	= 0;
+    VulkanKore_param.enabled_layer_count 		= 0;
+    //
     result = SetupVulkanInstance(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
         dlg_fatal( "Failed to initialize Vulkan instance.\n" );
         return EXIT_FAILURE;
     }
     
-    /*
-    // Step 3 - Find/Create Device and     (Section 6.4)
-    //          Set-up your selected device
-    VkPhysicalDevice physicalDevice         = NULL;
-    VkDevice         device                 = NULL;
-    SetupPhysicalDevice(instance,
-                        &physicalDevice,
-                        &device);
-     
+    // Step 3 - Find/Create GPU Device and setup your selected device
+    VulkanKore_param.physicalDevice		= VK_NULL_HANDLE;
+    VulkanKore_param.device				= VK_NULL_HANDLE;
+    SetupPhysicalDevice(&VulkanKore_param);
+    
+    /* 
      // Step 4 - Initialize Swap-Chain     (Section 6.5)
      VkSwapchainKHR swapChain               = NULL;
      VkImage*       presentImages           = NULL;

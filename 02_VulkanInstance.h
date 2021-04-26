@@ -45,7 +45,6 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
 
 int SetupVulkanExtensions() {
     //Initialize and reset to default value
-    local_VulkanKore_param->enabled_extension_count = 0;
     uint32_t required_extension_count = 0;
     
     // Automatically check and list the required extensions for this Vulkan instance to start
@@ -70,7 +69,6 @@ int SetupVulkanExtensions() {
 
 int SetupVulkanLayers() {
     //Initialize and reset to default value
-    local_VulkanKore_param->enabled_layer_count = 0;
     uint32_t required_layers_count = 0;
     
     //

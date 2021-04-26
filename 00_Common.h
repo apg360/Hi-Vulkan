@@ -273,14 +273,11 @@ void arr_append(struct Array *arr, char *element);
 
 //-------------------------------
 struct global_parameters {
-    int		width;
-    int		height;
-	GLFWwindow* windowHandle;
-	VkInstance instance;
-	VkSurfaceKHR surface;
-	//VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
-	//VkDevice device 				  = VK_NULL_HANDLE;
-	//VezSwapchain swapchain 		  = VK_NULL_HANDLE;
+    int					width;
+    int					height;
+	GLFWwindow* 		windowHandle;
+	VkInstance 			instance;
+	VkSurfaceKHR 		surface;
 	
 	// Pointer or array ?
     // *test = array of character
@@ -293,4 +290,12 @@ struct global_parameters {
     const char **enabledExtensions; // array of string, 2-dimensional array of characters
     uint32_t enabled_layer_count;
     const char **enabledLayers;		// array of string, 2-dimensional array of characters
+    
+    //
+    uint32_t 			physicalDeviceCount;
+    VkPhysicalDevice 	physicalDevice;
+    VkDevice         	device;
+    
+    //
+    //VezSwapchain swapchain 		  = VK_NULL_HANDLE;
 };
