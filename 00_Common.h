@@ -109,9 +109,6 @@
 // We must use define instead of a function. Because An array sent as a parameter to a function is treated as a pointer, 
 //   so sizeof will return the pointer's size, instead of the array's. : void printSizeOf(int intArray[])
 #define COUNT_ARRAY_ELEMS(x) (int) (  sizeof(x) / sizeof((x)[0])  )
-	/*if ( sizeof((x)[0]) != NULL ) {								\
-		(int) (  sizeof(x) / sizeof((x)[0])  )		\
-	}*/
 
 //Check vulkan error and exit application
 #define ERR_VULKAN_EXIT(val, err_msg)               \
@@ -285,8 +282,10 @@ struct global_parameters {
 	//VkDevice device 				  = VK_NULL_HANDLE;
 	//VezSwapchain swapchain 		  = VK_NULL_HANDLE;
 	
-    // *test = array of character, **test = array of string, 2-dimensional array of characters
-    // array of string,  **enabledExtensions = *enabledExtensions[2]
+    // array of string, 2-dimensional array of characters
+    // *test = array of character
+    // **test = array of string,
+    // **test is same as *test[2]
     //variable char*   = string                         => char *y = "ABC";
     //variable char**  = string pointer / string array	=> char **y = {"ABC", "DEF", "GHI", 123};
     uint32_t enabled_extension_count;
