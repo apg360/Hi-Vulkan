@@ -74,9 +74,8 @@ int ScanGPUs() {
 	}
 	//If no GPU was selected
     // commented TEMPORARY for testing -> if (local_VulkanKore_param->physicalDevice == VK_NULL_HANDLE) {dlg_error("Couldn't select any discrete GPU device"); return EXIT_FAILURE;}
-    // For testing, if no discrete gpu was found, we force take first gpu. Most likely integrated gpu like intel UHD.
+    // 				For testing, if no discrete gpu was found, we force take first gpu. Most likely integrated gpu like intel UHD.
     if (local_VulkanKore_param->physicalDevice == VK_NULL_HANDLE) { local_VulkanKore_param->physicalDevice=local_VulkanKore_param->physicalDevices[0]; }
-    
     
     return EXIT_SUCCESS;
 }
