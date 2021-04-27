@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     VulkanKore_param.surface  	= VK_NULL_HANDLE;
     VulkanKore_param.enabled_extension_count 	= 0;
     VulkanKore_param.enabled_layer_count 		= 0;
-    //
+    VulkanKore_param.enableValidationLayers		= false;
     result = SetupVulkanInstance(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
         dlg_fatal( "Failed to initialize Vulkan instance.\n" );

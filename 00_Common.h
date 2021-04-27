@@ -192,7 +192,7 @@ struct global_parameters {
 	GLFWwindow* 		windowHandle;
 	VkInstance 			instance;
 	VkSurfaceKHR 		surface;
-	
+	const bool 			enableValidationLayers;
 	//
     uint32_t enabled_extension_count;
     string enabledExtensions;

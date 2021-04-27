@@ -12,16 +12,12 @@ VezDeviceCreateInfo		deviceCreateInfo 	= {};
 //________//________// END
 
 int ScanGPUs();
-int gpuQueue();
 
 int SetupPhysicalDevice(struct global_parameters *pVulkanKore_param)
 {
 	local_VulkanKore_param=pVulkanKore_param;
 	
 	vk_error = ScanGPUs();
-    if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
-    
-    vk_error = gpuQueue();
     if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
     // Create a logical device connection to the physical device.
@@ -50,10 +46,18 @@ int ScanGPUs() {
 	for (uint32_t index = 0; index < local_VulkanKore_param->physicalDeviceCount; ++index)
 	{
 		VkPhysicalDeviceProperties deviceProperties;
+		VkPhysicalDeviceFeatures deviceFeatures;
+		
 		memset(&deviceProperties, 0, sizeof deviceProperties);
+		memset(&deviceFeatures, 0, sizeof deviceFeatures);
 		
 		//Gets the properties of a physical device
 		vezGetPhysicalDeviceProperties(local_VulkanKore_param->physicalDevices[index], &deviceProperties); 
+		
+		//Gets the features of a physical device
+		vezGetPhysicalDeviceFeatures(local_VulkanKore_param->physicalDevices[index], &deviceFeatures);
+		
+		dlg_warn("Device Feature: %s", deviceFeatures);
 		
 		dlg_info("Driver Version: %d", deviceProperties.driverVersion);
 		dlg_info("Device Name:    %s", deviceProperties.deviceName);
@@ -80,27 +84,4 @@ int ScanGPUs() {
     return EXIT_SUCCESS;
 }
 
-int gpuQueue() {
-	
-	/*
-	// Fill up the physical device memory properties:
-	VkPhysicalDeviceMemoryProperties memoryProperties;
-	vkGetPhysicalDeviceMemoryProperties( *outPhysicalDevice, &memoryProperties);
 
-	// Here's where you initialize your queues
-	// You'll discuss queues next - however, you need to specify the queue
-	// details for the device creation info
-	VkDeviceQueueCreateInfo queueCreateInfo = {};
-	queueCreateInfo.sType              		= VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-	// Use the first queue family in the family list
-	queueCreateInfo.queueFamilyIndex   		= 0;
-	queueCreateInfo.queueCount         		= 1;
-	float queuePriorities[]            		= { 1.0f };
-	queueCreateInfo.pQueuePriorities   		= queuePriorities;
-	
-	// Same extension you specified when initializing Vulkan
-	const char *deviceExtensions[]     		= { "VK_KHR_swapchain" };
-	const char *layers[]               		= { "VK_LAYER_KHRONOS_validation" }; // "VK_LAYER_LUNARG_standard_validation" or "VK_LAYER_NV_optimus"
-	*/
-	return EXIT_SUCCESS;
-}

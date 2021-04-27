@@ -28,7 +28,7 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
     instanceCreateInfo.pApplicationInfo         = &appInfo;
     vk_error = SetupVulkanExtensions();
     if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
-    //vk_error = SetupVulkanLayers();
+    //vk_error = SetupVulkanValidationLayers();
     //if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
     vk_error = vezCreateInstance(&instanceCreateInfo, &local_VulkanKore_param->instance);
@@ -67,7 +67,8 @@ int SetupVulkanExtensions() {
     return EXIT_SUCCESS;
 }
 
-int SetupVulkanLayers() {
+// https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Validation_layers
+int SetupVulkanValidationLayers() {
     //Initialize and reset to default value
     uint32_t required_layers_count = 0;
     
