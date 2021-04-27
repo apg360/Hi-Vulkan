@@ -85,24 +85,22 @@ int gpuQueue() {
 	/*
 	// Fill up the physical device memory properties:
 	VkPhysicalDeviceMemoryProperties memoryProperties;
-	vkGetPhysicalDeviceMemoryProperties( *outPhysicalDevice,
-										 // handle to the device query
-										 &memoryProperties);
-										 // pointer to VkPhysicalDeviceMemoryProperties structure returned with properties
+	vkGetPhysicalDeviceMemoryProperties( *outPhysicalDevice, &memoryProperties);
+
 	// Here's where you initialize your queues
 	// You'll discuss queues next - however, you need to specify the queue
 	// details for the device creation info
 	VkDeviceQueueCreateInfo queueCreateInfo = {};
-	queueCreateInfo.sType              = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	queueCreateInfo.sType              		= VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
 	// Use the first queue family in the family list
-	queueCreateInfo.queueFamilyIndex   = 0;
-	queueCreateInfo.queueCount         = 1;
-	float queuePriorities[]            = { 1.0f };
-	queueCreateInfo.pQueuePriorities   = queuePriorities;
+	queueCreateInfo.queueFamilyIndex   		= 0;
+	queueCreateInfo.queueCount         		= 1;
+	float queuePriorities[]            		= { 1.0f };
+	queueCreateInfo.pQueuePriorities   		= queuePriorities;
 	
 	// Same extension you specified when initializing Vulkan
-	const char *deviceExtensions[]     = { "VK_KHR_swapchain" };
-	const char *layers[]               = { "VK_LAYER_KHRONOS_validation" }; // "VK_LAYER_LUNARG_standard_validation" or "VK_LAYER_NV_optimus"
+	const char *deviceExtensions[]     		= { "VK_KHR_swapchain" };
+	const char *layers[]               		= { "VK_LAYER_KHRONOS_validation" }; // "VK_LAYER_LUNARG_standard_validation" or "VK_LAYER_NV_optimus"
 	*/
 	return EXIT_SUCCESS;
 }
