@@ -28,8 +28,8 @@ int SetupVulkanInstance(struct global_parameters *pVulkanKore_param)
     instanceCreateInfo.pApplicationInfo         = &appInfo;
     vk_error = SetupVulkanExtensions();
     if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
-    vk_error = SetupVulkanLayers();
-    if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
+    //vk_error = SetupVulkanLayers();
+    //if (vk_error != EXIT_SUCCESS) return EXIT_FAILURE;
     
     vk_error = vezCreateInstance(&instanceCreateInfo, &local_VulkanKore_param->instance);
     if (vk_error != VK_SUCCESS) return EXIT_FAILURE;
@@ -51,18 +51,18 @@ int SetupVulkanExtensions() {
     const char **required_extensions = glfwGetRequiredInstanceExtensions(&required_extension_count);
     
     // Initialize number of elements in array
-    local_VulkanKore_param->enabledExtensions = malloc( sizeof(char*) * required_extension_count );
+    initString(required_extension_count,&local_VulkanKore_param->enabledExtensions);
     
     // Update the global paramaters
     local_VulkanKore_param->enabled_extension_count = required_extension_count;
-    local_VulkanKore_param->enabledExtensions 		= required_extensions;
+    local_VulkanKore_param->enabledExtensions.data  = required_extensions;
     
     // List elements to log file
-	log_array_list_item(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions,"Extensions Enabled");
+	log_array_list_item(local_VulkanKore_param->enabled_extension_count,local_VulkanKore_param->enabledExtensions.data,"Extensions Enabled");
     
     // Assign to vulkan instance
-    instanceCreateInfo.enabledExtensionCount           = local_VulkanKore_param->enabled_extension_count;
-    instanceCreateInfo.ppEnabledExtensionNames         = local_VulkanKore_param->enabledExtensions;
+    instanceCreateInfo.enabledExtensionCount	= local_VulkanKore_param->enabled_extension_count;
+    instanceCreateInfo.ppEnabledExtensionNames  = local_VulkanKore_param->enabledExtensions.data;
     
     return EXIT_SUCCESS;
 }
@@ -71,22 +71,21 @@ int SetupVulkanLayers() {
     //Initialize and reset to default value
     uint32_t required_layers_count = 0;
     
-    //
-    //vezEnumerateDeviceLayerProperties
-    required_layers_count = 1;
-    
     // Initialize number of elements in array
-    local_VulkanKore_param->enabledLayers = malloc( sizeof(char*) * required_layers_count );
+    required_layers_count = 1;
+    initString(required_layers_count,&local_VulkanKore_param->enabledLayers);
     
-    // VK_LAYER_KHRONOS_validation or VK_LAYER_LUNARG_standard_validation or "VK_LAYER_NV_optimus"
-    local_VulkanKore_param->enabledLayers[0] = "VK_LAYER_LUNARG_standard_validation";
+    // Update the global paramaters
     local_VulkanKore_param->enabled_layer_count = required_layers_count;
+    // VK_LAYER_KHRONOS_validation or VK_LAYER_LUNARG_standard_validation or "VK_LAYER_NV_optimus"
+    local_VulkanKore_param->enabledLayers.data[0] = "VK_LAYER_LUNARG_standard_validation";
     
     // List elements to log file
-    log_array_list_item(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers,"Layers enabled");
+    log_array_list_item(local_VulkanKore_param->enabled_layer_count,local_VulkanKore_param->enabledLayers.data,"Layers enabled");
     
     // Assign to vulkan instance
-    instanceCreateInfo.ppEnabledLayerNames = local_VulkanKore_param->enabledLayers;
+    instanceCreateInfo.enabledLayerCount	= local_VulkanKore_param->enabled_layer_count;
+    instanceCreateInfo.ppEnabledLayerNames	= local_VulkanKore_param->enabledLayers.data;
     
     return EXIT_SUCCESS;
 }

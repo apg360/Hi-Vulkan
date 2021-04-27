@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
     result = SetupPhysicalDevice(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
         dlg_fatal( "Failed to setup GPU.\n" );
-        return EXIT_FAILURE;
+        //commented TEMPORARY for testing// return EXIT_FAILURE;
     }
     
     /* 

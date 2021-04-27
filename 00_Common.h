@@ -159,6 +159,58 @@
         dlg_info("%s no %u : %s",msg,index,array[index]);	\
     }
 
+// In C syntax for a Pointer and an Array is same
+// *test 	= array of character
+// **test 	= array of string,   **test equivalent *test[2]
+// char *y 	= "ABC";  						=> variable char*   = a string OR character pointer
+// char **y = {"ABC", "DEF", "GHI", 123};  	=> variable char**  = array of string OR string pointer
+//
+// string test;
+// initString(2,&test);
+// test.data[0]="AAA";
+// test.data[1]="BBB";
+// for (int i = 0; i < test.size; i++) dlg_warn("%s",test.data[i]);
+//
+typedef struct {
+  const char **data; // array of string, 2-dimensional array of characters
+  uint32_t size;
+} string;
+
+void initString(uint32_t initialSize, string *a) {
+  a->data = malloc( sizeof(char *) * initialSize );
+  a->size = initialSize;
+}
+void freeString(string *a) {
+  free(a->data);
+  a->data = NULL;
+}
+
+//-------------------------------
+struct global_parameters {
+    int					windowSizeWidth;
+    int					windowSizeHeight;
+	GLFWwindow* 		windowHandle;
+	VkInstance 			instance;
+	VkSurfaceKHR 		surface;
+	
+	//
+    uint32_t enabled_extension_count;
+    string enabledExtensions;
+    uint32_t enabled_layer_count;
+    string enabledLayers;
+    
+    //
+    uint32_t 			physicalDeviceCount;
+    VkPhysicalDevice    *physicalDevices;
+    VkPhysicalDevice 	physicalDevice;
+    VkDevice         	device;
+    
+    //
+    //VezSwapchain swapchain 		  = VK_NULL_HANDLE;
+};
+
+
+
 int fps_nbFrames = 0;
 double fps_lastTime = 0;
 void showFPS()
@@ -198,8 +250,9 @@ void showFPS()
      //assert(false);
 }
 
+/*
 // https://stackoverflow.com/questions/6169972/realloc-an-array-of-structs
-/*int growArray(User **user_array, int currentSize, int numNewElems)
+int growArray(User **user_array, int currentSize, int numNewElems)
 {
     const int totalSize = currentSize + numNewElems;
     User *temp = (User*)realloc(*user_array, (totalSize * sizeof(User)));
@@ -215,9 +268,9 @@ void showFPS()
     }
 
     return totalSize;
-}*/
+}
 
-/*
+
 // https://stackoverflow.com/questions/3536153/c-dynamically-growing-array/3536261
 // https://stackoverflow.com/questions/26831981/should-i-check-if-malloc-was-successful
 // http://www.cplusplus.com/reference/cstdlib/realloc
@@ -230,7 +283,7 @@ for (int i = 0; i < 100; i++)
 printf("%d\n", a.array[9]);  // print 10th element
 printf("%d\n", a.used);  // print number of elements
 freeArray(&a);
-*/
+
 typedef struct {
   int *array;
   size_t used;
@@ -268,35 +321,4 @@ typedef struct Array {
 
 myArray2 *create_array (int capacity);
 void arr_append(struct Array *arr, char *element);
-
-
-
-//-------------------------------
-struct global_parameters {
-    int					windowSizeWidth;
-    int					windowSizeHeight;
-	GLFWwindow* 		windowHandle;
-	VkInstance 			instance;
-	VkSurfaceKHR 		surface;
-	
-	// Pointer or array ?
-    // *test = array of character
-    // **test = array of string
-    // **test is same as *test[2]
-    //
-    // variable char*   = a string OR character pointer     => char *y = "ABC";
-    // variable char**  = array of string OR string pointer => char **y = {"ABC", "DEF", "GHI", 123};
-    uint32_t enabled_extension_count;
-    const char **enabledExtensions; // array of string, 2-dimensional array of characters
-    uint32_t enabled_layer_count;
-    const char **enabledLayers;		// array of string, 2-dimensional array of characters
-    
-    //
-    uint32_t 			physicalDeviceCount;
-    VkPhysicalDevice    *physicalDevices;
-    VkPhysicalDevice 	physicalDevice;
-    VkDevice         	device;
-    
-    //
-    //VezSwapchain swapchain 		  = VK_NULL_HANDLE;
-};
+*/
