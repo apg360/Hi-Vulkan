@@ -60,22 +60,22 @@ int main(int argc, char *argv[]) {
     result = SetupPhysicalDevice(&VulkanKore_param);
     if ( result == EXIT_FAILURE ) {
         dlg_fatal( "Failed to setup GPU.\n" );
-        //commented TEMPORARY for testing// return EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
     
     /* 
-     // Step 4 - Initialize Swap-Chain     (Section 6.5)
-     VkSwapchainKHR swapChain               = NULL;
-     VkImage*       presentImages           = NULL;
-     VkImageView*   presentImageViews       = NULL;
-     SetupSwapChain(device,
-                    physicalDevice,
-                    surface,
-                    &width,
-                    &height,
-                    &swapChain,
-                    &presentImages,
-                    &presentImageViews);
+    // Step 4 - Initialize Swap-Chain     (Section 6.5)
+    VkSwapchainKHR swapChain               = NULL;
+    VkImage*       presentImages           = NULL;
+    VkImageView*   presentImageViews       = NULL;
+    SetupSwapChain(device,
+                   physicalDevice,
+                   surface,
+                   &width,
+                   &height,
+                   &swapChain,
+                   &presentImages,
+                   &presentImageViews);
     
     //dlg_warn("presentImageViews[0] = %p", &presentImageViews[0]); //Debug
     //dlg_warn("presentImageViews[1] = %p", &presentImageViews[1]); //Debug

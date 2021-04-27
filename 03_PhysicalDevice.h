@@ -46,7 +46,6 @@ int ScanGPUs() {
     
     vk_error = vezEnumeratePhysicalDevices(local_VulkanKore_param->instance, &local_VulkanKore_param->physicalDeviceCount, local_VulkanKore_param->physicalDevices);
 	
-	
 	// Enumerate all physical devices and print out the details
 	for (uint32_t index = 0; index < local_VulkanKore_param->physicalDeviceCount; ++index)
 	{
