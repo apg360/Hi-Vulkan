@@ -63,21 +63,18 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     
-    // Step 4 - Initialize Swap-Chain     (Section 6.5)
+    // Step 4 - Initialize Swap-Chain
     VulkanKore_param.swapchain			= VK_NULL_HANDLE;
-    /*
-    SetupSwapChain(device,
-                   physicalDevice,
-                   surface,
-                   &width,
-                   &height,
-                   &swapChain,
-                   &presentImages,
-                   &presentImageViews);
+    result = SetupSwapChain(&VulkanKore_param);
+    if ( result == EXIT_FAILURE ) {
+        dlg_fatal( "Failed to Initialize Swap-Chain.\n" );
+        return EXIT_FAILURE;
+    }
     
     //dlg_warn("presentImageViews[0] = %p", &presentImageViews[0]); //Debug
     //dlg_warn("presentImageViews[1] = %p", &presentImageViews[1]); //Debug
-    
+
+/*
 // Step 5 - Create Render Pass
 // Not required in V-EZ
 
@@ -180,8 +177,8 @@ int cleanup() {
 	//https://www.glfw.org/docs/latest/group__vulkan.html#ga1a24536bec3f80b08ead18e28e6ae965
 	vkDestroySurfaceKHR(VulkanKore_param.instance, VulkanKore_param.surface, NULL);
 	
-	//
-    vezDestroyInstance(VulkanKore_param.instance); //vkDestroyInstance(instance, NULL);
+	vezDestroyDevice(VulkanKore_param.device);
+    vezDestroyInstance(VulkanKore_param.instance);
 	
     glfwDestroyWindow(VulkanKore_param.windowHandle);
     glfwTerminate();
