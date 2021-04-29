@@ -206,7 +206,7 @@ struct global_parameters {
     VkDevice         	device;
     
     //
-    //VezSwapchain swapchain 		  = VK_NULL_HANDLE;
+    VezSwapchain 		swapchain;
 };
 
 

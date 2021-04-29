@@ -10,9 +10,9 @@
 #include "01_Window.h"                // <-- GLFW window, context, keyboard, mouse
 #include "02_VulkanInstance.h"        // <-- Initialize V-EZ Vulkan
 #include "03_PhysicalDevice.h"        // <-- Find/Create GPU Device and setup your selected device
+#include "04_SwapChain.h"             // <-- Initialize Swap-Chain
 
 /*
-#include "04_SwapChain.h"             // <-- (Section 6.5)  Initialize Swap-Chain
 #include "05_RenderPass.h"            // <-- (Section 6.6)  Create Render Pass
 #include "06_CommandBuffer.h"         // <-- (Section 6.7)  Create Command Pool/Buffer
 #include "07_VertexBuffer.h"          // <-- (Section 6.10) Vertex Data/Buffer
@@ -63,11 +63,9 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     
-    /* 
     // Step 4 - Initialize Swap-Chain     (Section 6.5)
-    VkSwapchainKHR swapChain               = NULL;
-    VkImage*       presentImages           = NULL;
-    VkImageView*   presentImageViews       = NULL;
+    VulkanKore_param.swapchain			= VK_NULL_HANDLE;
+    /*
     SetupSwapChain(device,
                    physicalDevice,
                    surface,
