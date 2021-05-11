@@ -20,6 +20,19 @@
 #include "09_Descriptors.h"           // <-- (Section 6.13) Setup Descriptors/Sets
 #include "10_Pipeline.h"             // <-- (Section 6.14) Pipeline
 #include "11_RenderLoop.h"           // <-- (Section 6.16) Render Loop
+
+
+https://www.glfw.org/docs/latest/intro.html#error_handling
+
+https://gist.github.com/bl4ckb0ne/92906f3b00531396a61eaf2966676b16
+https://github.com/SaschaWillems/Vulkan/blob/master/base/vulkanexamplebase.cpp
+
+https://github.com/apg360/glfw_vulkan_triangle/blob/master/triangle-vulkan.c
+https://github.com/apg360/glfw_vulkan_triangle/blob/master/libs/GLAD/vulkan.h
+
+https://github.com/apg360/Hello_Triangle/blob/master/src/HelloTriangle.cpp
+https://github.com/apg360/VulkanTutorial_hello_triangle/blob/master/main.cxx
+
 */
 
 struct global_parameters VulkanKore_param;
@@ -73,10 +86,17 @@ int main(int argc, char *argv[]) {
     
     //dlg_warn("presentImageViews[0] = %p", &presentImageViews[0]); //Debug
     //dlg_warn("presentImageViews[1] = %p", &presentImageViews[1]); //Debug
-
 /*
-// Step 5 - Create Render Pass
-// Not required in V-EZ
+	 // Step 5 - Create Render Pass
+     VkRenderPass    renderPass             = NULL;
+     VkFramebuffer*  frameBuffers           = NULL;
+     SetupRenderPass(device,
+                     physicalDevice,
+                     width,
+                     height,
+                     presentImageViews,
+                     &renderPass,
+                     &frameBuffers);
 
      // Step 6 - Create Command Pool/Buffer  (Section 6.7)
      VkCommandBuffer  commandBuffer         = NULL;
@@ -172,12 +192,14 @@ int main(int argc, char *argv[]) {
 
 
 int cleanup() {
+	
+	vezDestroyDevice(VulkanKore_param.device);
+	
 	//The window surface must be destroyed before the specified Vulkan instance. It is the responsibility of the caller to destroy the window surface.
 	//GLFW does not destroy it for you. Call vkDestroySurfaceKHR to destroy the surface.
 	//https://www.glfw.org/docs/latest/group__vulkan.html#ga1a24536bec3f80b08ead18e28e6ae965
 	vkDestroySurfaceKHR(VulkanKore_param.instance, VulkanKore_param.surface, NULL);
 	
-	vezDestroyDevice(VulkanKore_param.device);
     vezDestroyInstance(VulkanKore_param.instance);
 	
     glfwDestroyWindow(VulkanKore_param.windowHandle);
