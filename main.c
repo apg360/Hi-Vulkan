@@ -11,9 +11,9 @@
 #include "02_VulkanInstance.h"        // <-- Initialize V-EZ Vulkan
 #include "03_PhysicalDevice.h"        // <-- Find/Create GPU Device and setup your selected device
 #include "04_SwapChain.h"             // <-- Initialize Swap-Chain
+#include "05_RenderPass.h"            // <-- Create Render Pass
 
 /*
-#include "05_RenderPass.h"            // <-- (Section 6.6)  Create Render Pass
 #include "06_CommandBuffer.h"         // <-- (Section 6.7)  Create Command Pool/Buffer
 #include "07_VertexBuffer.h"          // <-- (Section 6.10) Vertex Data/Buffer
 #include "08_ShaderandUniforms.h"     // <-- (Section 6.11) Load/Setup Shaders
@@ -84,20 +84,14 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
     
-    //dlg_warn("presentImageViews[0] = %p", &presentImageViews[0]); //Debug
-    //dlg_warn("presentImageViews[1] = %p", &presentImageViews[1]); //Debug
-/*
 	 // Step 5 - Create Render Pass
-     VkRenderPass    renderPass             = NULL;
-     VkFramebuffer*  frameBuffers           = NULL;
-     SetupRenderPass(device,
-                     physicalDevice,
-                     width,
-                     height,
-                     presentImageViews,
-                     &renderPass,
-                     &frameBuffers);
+     result = SetupRenderPass(&VulkanKore_param);
+     if ( result == EXIT_FAILURE ) {
+         dlg_fatal( "Failed to Initialize Render Pass.\n" );
+         return EXIT_FAILURE;
+     }
 
+/*
      // Step 6 - Create Command Pool/Buffer  (Section 6.7)
      VkCommandBuffer  commandBuffer         = NULL;
      SetupCommandBuffer(device,
