@@ -1,4 +1,4 @@
-# VulkanKore
+# Hi!Vulkan
 
 VulkanKore is the foundation step 0, libraries :
 * [GLFW : the multi-platform library for window context and input (keyboard, mouse, gamepad input)](https://github.com/glfw/glfw)
